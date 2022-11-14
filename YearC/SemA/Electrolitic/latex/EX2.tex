@@ -1,0 +1,210 @@
+\documentclass[notitlepage]{report}
+
+\input{~/Physics/Latex/preamble}
+\input{~/Physics/Latex/macros}
+\input{~/Physics/Latex/letterfonts}
+
+\title{\Huge{Electrolitic}\\Exercise 2}
+\author{Alon Ner Gaon}
+
+\begin{document}
+
+\maketitle
+
+\begin{question}[title = Question 1.2]{}{}
+Show that the requirement that the Lorentz transformation $\Lambda$ preserves the norm of the 4-vector is given by the expression:\\
+\[
+	g=\Lambda^Tg\Lambda
+.\] 
+Where $g$ is the metric tensor.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+Firstly we'll note that $g_{\mu\nu}=g_{\nu\mu}$ for $g$ is symetric.\\
+\[
+	x^\prime{}^{\mu} x^\prime_\mu = g_{\mu\alpha}x^\prime{}^\mu x^\prime{}^{\alpha}=g_{\mu\alpha}\underbrace{\Lambda^\mu_{\ \beta}}_{\left[\Lambda^\beta_{\ \mu}\right]^T }x^\beta\Lambda^\alpha_{\ \nu}x^\nu=\left[\Lambda^\beta_{\ \mu}\right]^Tg_{\mu\alpha}\Lambda^\alpha_{\ \nu}x^\beta x^\nu\overset{!}{=}g_{\mu\alpha}x^\mu x^{\alpha}
+.\] 
+\[
+	\Rightarrow\boxed{ \left[\Lambda^\beta_{\ \mu}\right]^Tg_{\mu\alpha}\Lambda^\alpha_{\ \nu}=g_{\mu\alpha}}
+.\] 
+\end{question}
+\begin{question}[title = Question 1.2]{}{}
+Show explicitly that the Boost transformation $\Lambda_B$ preserves the norm.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+we'll look at a boost in the $x$ axis $\Lambda_x$:\\
+ \begin{align*}
+	\Lambda_x^Tg\Lambda_x =&\ 
+	\begin{pmatrix}
+		\gamma & \beta\gamma & 0 & 0\\
+		\beta\gamma & \gamma & 0 & 0\\
+		0 & 0 & 1 & 0\\
+		0 & 0 & 0 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		1 & 0 & 0 & 0\\
+		0 & -1& 0 & 0\\
+		0 & 0 & -1 & 0\\
+		0 & 0 & 0 & -1
+	\end{pmatrix}
+	\begin{pmatrix}
+		\gamma & \beta\gamma & 0 & 0\\
+		\beta\gamma & \gamma & 0 & 0\\
+		0 & 0 & 1 & 0\\
+		0 & 0 & 0 & 1
+	\end{pmatrix}\\
+	 =&\ 
+	\begin{pmatrix}
+		\gamma & \beta\gamma & 0 & 0\\
+		\beta\gamma & \gamma & 0 & 0\\
+		0 & 0 & 1 & 0\\
+		0 & 0 & 0 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		\gamma & \beta\gamma & 0 & 0\\
+		-\beta\gamma & -\gamma & 0 & 0\\
+		0 & 0 & -1 & 0\\
+		0 & 0 & 0 & -1
+	\end{pmatrix}\\
+	 =&\ 
+	\begin{pmatrix}
+		\gamma^2-\beta^2\gamma^2 & \beta\gamma^2-\beta\gamma^2 & 0 & 0\\
+		\beta\gamma^2-\beta\gamma^2 & \beta^2\gamma^2-\gamma^2 & 0 & 0\\
+		0 & 0 & -1 & 0\\
+		0 & 0 & 0 & -1
+	\end{pmatrix}
+.\end{align*}
+\tcbbreak
+But $\gamma^2\left(1-\beta^2\right)=1$, so:\\
+\[
+	\Lambda_x^Tg\Lambda_x = 
+	\begin{pmatrix}
+		1 & 0 & 0 & 0\\
+		0 & -1& 0 & 0\\
+		0 & 0 & -1 & 0\\
+		0 & 0 & 0 & -1
+	\end{pmatrix}
+	=g
+.\] 
+And with what we showed in Part 1 it proves that $\Lambda$ preserves the norm.
+\end{question}
+
+\begin{question}[title = Question 2]{}{}
+\[
+	\mathcal{L}=\frac{k}{2}\partial_t\theta\partial_x\theta-\frac{m}{2}\left(\partial_x\theta\right)^2 
+.\] 
+Where $m,k>0$ real constant.
+	\begin{question}[title = Part 1]{}{}
+Find the equations of motion using E-L.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\[
+\frac{\partial\mathcal{L}}{\partial\theta}=\partial_\nu \frac{\partial\mathcal{L}}{\partial \left(\partial_\nu\theta\right) }
+.\] 
+\[
+	\Downarrow
+\] 
+\begin{align*}
+	\frac{k}{2}\frac{\partial}{\partial t}\left(\partial_x\theta\right)+&\frac{\partial}{\partial x}\left(\frac{k}{2}\partial_t\theta-m\partial_x\theta\right) = 0\\
+ k\partial_t\partial_x\theta =&\ m\partial^2_x\theta
+.\end{align*}
+\end{question}
+\begin{question}[title = Part 2]{}{}
+	Find the equation of motion using the Hemiltion principle.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{align*}
+	\delta S =&\ S\left(\theta+\delta\theta,\partial_x\theta+\delta\left(\partial_x\theta\right),\partial_t\theta+\delta\left(\partial_t\theta\right) \right) -S\left(\theta,\partial_x\theta,\partial_t\theta \right)\\
+	=&\int\frac{\partial\mathcal{L}}{\partial\theta}\delta\theta+\frac{\partial\mathcal{L}}{\partial\left(\partial_x\theta\right) }\delta\left(\partial_x\theta\right)+\frac{\partial\mathcal{L}}{\partial\left(\partial_t\theta\right)}\delta\left(\partial_t\theta\right)\\
+	=&\int\frac{\partial\mathcal{L}}{\partial\theta}\delta\theta+\frac{\partial\mathcal{L}}{\partial\left(\partial_x\theta\right) }\partial_x\left(\delta\theta\right)+\frac{\partial\mathcal{L}}{\partial\left(\partial_t\theta\right)}\partial_t\left(\delta\theta\right)
+.\end{align*}
+Integrating by parts:\\
+\begin{align*}
+	=&\int\left[\frac{\partial\mathcal{L}}{\partial\theta}-\frac{\partial}{\partial x} \left(\frac{\partial\mathcal{L}}{\partial\left(\partial_x\theta\right) }\right) -\frac{\partial}{\partial x}\left(\frac{\partial\mathcal{L}}{\partial\left(\partial_t\theta\right)}\right) \right] \delta\theta
+.\end{align*}
+And the Hemilton principle states that the physical trajectory is governed by $\delta S=0 $.\\
+Hence:\\
+\[
+\frac{\partial\mathcal{L}}{\partial\theta}=\partial_\nu \frac{\partial\mathcal{L}}{\partial \left(\partial_\nu\theta\right) }
+.\] 
+And the rest is the same as in the previous part.
+\end{question}
+\begin{question}[title = Part 3]{}{}
+Find the canonical momentum.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\[
+	\Pi\equiv\frac{\partial\mathcal{L}}{\partial\left(\partial_t\theta\right)}=\frac{k}{2}\partial_x\theta
+.\] 
+\end{question}
+\begin{question}[title = Part 4]{}{}
+Find $\mathcal{H}$.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\[
+	\mathcal{H}\equiv\Pi\frac{\partial\theta}{\partial t}-\mathcal{L}=\frac{m}{2}\left(\partial_x\theta\right)^2 
+.\] 
+\end{question}
+\end{question}
+\newpage
+\begin{question}[title = Question 3.1]{}{}
+Show that:\\
+\[
+	\frac{\text{d}E_k}{\text{d}t}=\vec{v}\cdot \frac{\text{d}\vec{p}}{\text{d}t}  
+.\] 
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{align*}
+	E_k\equiv E-E_{rest}=&\ \gamma m_0c^2-m_0c^2=\left(\gamma-1\right)m_0c^2 \\
+	\Rightarrow \frac{\text{d}E_k}{\text{d}t} =&\ m_0c^2\frac{\text{d}}{\text{d}t}\left(\gamma-1\right)   
+.\end{align*}
+We'll note that:\\
+\begin{align*}
+	\frac{\text{d}\gamma}{\text{d}t} =&\ \frac{\gamma^3}{c^2}\vec{a}\cdot \vec{v}
+.\end{align*}
+\begin{align*}
+	\Rightarrow \frac{\text{d}E_k}{\text{d}t} =&\ m_0\cancel{c^2}\frac{\gamma^3}{\cancel{c^2}}\vec{a}\cdot \vec{v}
+.\end{align*}
+On the other hand:\\
+\begin{align*}
+	\vec{v}\cdot \frac{\text{d}\vec{p}}{\text{d}t} =&\ \vec{v}\cdot \frac{\text{d}}{\text{d}t}\left(m_0\gamma \vec{v}\right)\\
+	 =&\ m_0 \vec{v}\cdot\left(\gamma \vec{a}+ \vec{v} \frac{\gamma^3}{c^2}\left(\vec{a} \cdot \vec{v}\right) \right)\\
+	  =&\ m_0\gamma\left(\vec{a}\cdot \vec{v}\right)+m_0 \frac{\gamma^3}{c^2}\left(\vec{a}\cdot \vec{v}\right)v^2\\
+		=&\ \gamma m_0\left(\vec{a}\cdot \vec{v}\right)\underbrace{\left(1+\gamma^2\beta^2\right)}_{\gamma^2}=\gamma^3m_0\left(\vec{a}\cdot \vec{v}\right)   
+.\end{align*}
+Hence:\\
+\begin{equation}
+	\frac{\text{d}E_k}{\text{d}t}=\vec{v}\cdot \frac{\text{d}\vec{p}}{\text{d}t}=\gamma^3m_0\left(\vec{a}\cdot \vec{v}\right)\label{eq1}
+\end{equation}
+\end{question}
+
+\begin{question}[title = Question 3.2]{}{}
+	Show that the 4-acceleration $a^{\nu}\equiv \frac{dU^\nu}{d\tau}$ is orthogonal to the 4-velocity.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{align*}
+	\frac{dU^\nu}{d\tau} =&\ \frac{\text{d}}{\text{d}\tau} \left(\gamma c,\gamma \vec{v}\right)\\
+	 =&\ \left(c\frac{\text{d}\gamma}{\text{d}t}\frac{\text{d}t}{\text{d}\tau},\gamma\frac{\text{d}\vec{v}}{\text{d}t}\frac{\text{d}t}{\text{d}\tau}+\frac{\text{d}\gamma}{\text{d}t}\frac{\text{d}t}{\text{d}\tau}\vec{v}\right) 
+.\end{align*}
+\tcbbreak
+We'll note that:\\
+\begin{align*}
+	\frac{\text{d}t}{\text{d}\tau} =&\ \gamma\\
+	\frac{\text{d}\gamma}{\text{d}t} =&\ \frac{\gamma^3}{c^2}\vec{a}\cdot \vec{v}\\
+	\Rightarrow a^{\nu}=\frac{dU^\nu}{d\tau} =&\ \left(\gamma^{4} \frac{\vec{a}\cdot \vec{v}}{c},\gamma^2 \vec{a}+\gamma^{4} \frac{\vec{a}\cdot \vec{v}}{c^2} \vec{v}\right)\\
+	\Rightarrow a^{\nu}U_\nu =&\ \gamma^{4} \frac{\vec{a}\cdot \vec{v}}{c}\gamma c-\left(\gamma^2 \vec{a}+\gamma^{4} \frac{\vec{a}\cdot \vec{v}}{c^2} \vec{v}\right)\gamma \vec{v}\\
+	 =&\ \gamma^{5}\left(\vec{a}\cdot \vec{v}\right)-\gamma^{3}\left(\vec{a}\cdot \vec{v}\right)-\gamma^{5}\left(\vec{a}\cdot \vec{v}\right)\beta^2\\
+	 =&\ \gamma^{\cancelto{3}{5}}\left(\vec{a} \cdot \vec{v}\right)\cancelto{=\gamma^2}{\left(1-\beta^2\right)}-\gamma^{3}\left(\vec{a}\cdot \vec{v}\right)  \\
+	  =&\ \boxed{0}
+.\end{align*}
+\end{question}
+\begin{question}[title = Question 3.3]{}{}
+Find the 4 components $f^{\nu}=\frac{\text{d}p^{\nu}}{\text{d}\tau}$. What's the relation between $f^{0}$ and $\vec{f}$?
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{align*}
+	\frac{\text{d}p^{\nu}}{\text{d}\tau} =\frac{\text{d}t}{\text{d}\tau}\frac{\text{d}p^{\nu}}{\text{d}t} =&\ \gamma\frac{\text{d}}{\text{d}t}\left(\gamma m_0c,\gamma m_0 \vec{v}\right)\\
+	 =&\ \boxed{\left(\gamma\frac{1}{c} \gamma^3m_0\left(\vec{a} \cdot \vec{v}\right),\gamma\frac{1}{c^2}m_0\gamma^3\left(\vec{a}\cdot \vec{v}\right) \vec{v}+\gamma^2m_0 \vec{a}  \right)}\\
+	 \text{\eqref{eq1}}\Rightarrow f_0=&\ \frac{\gamma}{c}\left(\vec{v}\cdot \frac{\text{d}\vec{p}}{\text{d}t} \right) = \frac{\gamma}{c}\left(\vec{v}\cdot \vec{f}\right)\quad\left(= \frac{\gamma}{c} \frac{\text{d}E_k}{\text{d}t} \right)  
+.\end{align*}
+\end{question}
+\end{document}

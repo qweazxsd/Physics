@@ -1,0 +1,304 @@
+\documentclass[notitlepage]{report}
+
+\input{~/Physics/Latex/preamble}
+\input{~/Physics/Latex/macros}
+\input{~/Physics/Latex/letterfonts}
+
+\title{\Huge{Q.M. II}\\Exercise 2}
+\author{Alon Ner Gaon}
+
+\begin{document}
+
+\maketitle
+
+\begin{question}[title = Question 1]{}{}
+Use parity qualities and calculate the following for the harmonic osilator:\\
+\begin{gather}
+	\langle n|x|n\rangle\label{eq1}\\
+	\langle n|p^2|n+1\rangle\label{eq2} \\
+	\langle n|xpx|n\rangle\label{eq3}
+\end{gather}
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+Firstly, the eign states of the harmonic osilator $|n\rangle$ have a well defined parity.\\
+Hence in \eqref{eq1} we have $x$ wich is an anti-simetrical operator sandwiched by the same parity so\\
+\[
+	\langle n|x|n\rangle=0 
+.\] 
+In \eqref{eq2} we have a simetrical oparator $p^2$ sandwiched by an inverse parity, so again we have:\\
+\[
+	\langle n|p^2|n+1\rangle=0
+.\]
+In \eqref{eq3} we again have an anti-simetrical operator sandwiched by the same parity so\\
+\[
+	\langle n|xpx|n\rangle=0 
+.\] 
+\end{question}
+\begin{question}[title = Question 2.1]{}{}
+Given the space inversion operator $\Pi$ :\\
+\[
+	\Pi:\vec{r}\rightarrow - \vec{r}
+.\] 
+Show how the spherical harmonics transmute under the space inversion:\\
+\[
+	\Pi Y_l^m\left(\theta,\phi\right)=? 
+\] 
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+The space inversion in spherical coordinates:\\
+\begin{align*}
+	&r\rightarrow r    &\\
+	&\theta \rightarrow \pi-\theta &\left(\cos\theta\rightarrow-\cos\theta\right)\\ 
+	&\phi \rightarrow \phi+\pi &\left(e^{im\phi}\rightarrow\left(-1\right)^me^{im\phi}\right) 
+.\end{align*}
+\tcbbreak
+So after the space inversion the spherical harmonics become:\\
+\[
+	Y^m_l\propto\left(-1\right)^mP^m_l\left(-\cos\theta\right)e^{im\phi}  
+.\] 
+And the parity of the assosiated legandre polynomials \\
+\[
+	P^m_l\left(-x\right) = \left(-1\right)^{l+m} P^m_l\left(x\right) 
+.\] 
+Finally we can conclude:\\
+\[
+	\Pi Y^m_l=\left(-1\right)^lY^m_l 
+.\] 
+So the parity of $|lm\rangle $ is defined only by the quantom number $l$, which means \textbf{$\boldsymbol{|lm\rangle}$'s parity is degenarate $\boldsymbol{\left(2l+1\right)}$ times}.
+\end{question}
+\begin{question}[title = Question 2.2]{}{}
+Use the parity qualities of $|nlm\rangle $ to determine:\\
+\[
+	\langle nlm|x|nlm\rangle\qquad\langle nlm|\vec{r}|n,l+2,m\rangle\quad\langle nlm|r^2|n,l+1,m\rangle    
+.\] 
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+As derived in 2.1: ${|lm\rangle}$'s parity is defined solely on $l$.\\
+$x$ is asimetrical, which means  $\vec{r}$ is asimetrical, and $r^2$ is simetrical. Hence all of the above are 0.
+\end{question}
+
+\begin{question}[title = Question 3]{}{}
+Let $T$ be an hermitian generator of an arbitrary transformation, and:\\
+\[
+	\left[H,T\right]=0 
+.\] 
+Show that $H$ is diagonal in the eignbase of $T$.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+We'll define the eignkets of $T $:\\
+ \[
+	T|t\rangle=t|t\rangle  
+.\] 
+And examine:\\
+\begin{align*}
+\langle t^{\prime}|\left[H,T\right]|t\rangle =&\ \langle t^{\prime}|HT-TH|t\rangle \\
+=&\ \langle t^{\prime}|HT|t\rangle-\langle t^{\prime}|TH|t\rangle \\
+=&\ \langle t^{\prime}|Ht|t\rangle-\langle t^{\prime}|t^{\prime}H|t\rangle \\
+0=&\ \left(t-t^{\prime}\right)  \langle t^{\prime}|H|t\rangle
+\end{align*}
+So for $t\ne t^{\prime}$, $\langle t^{\prime}|H|t\rangle $ must be equal to 0. And for $t^{\prime}=t$, $\langle t^{\prime}|H|t\rangle$ can take any value.  $\Box$
+\end{question}
+\newpage
+\begin{question}[title = Question 4]{}{}
+Show how the following operators transform under Space Inversion $\Pi$ and under Time Reversal $\Theta$:\\
+\begin{gather}
+	\boldsymbol{S}\cdot\boldsymbol{p}\label{sp}\\
+	\boldsymbol{S}\cdot\boldsymbol{r}\label{sr}\\
+	\boldsymbol{S}\cdot\boldsymbol{L}\label{sl}\\
+	\boldsymbol{S}\cdot\boldsymbol{S}\label{ss}
+.\end{gather}
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+Firstly we'll note that under $\Pi $:\\
+\begin{align*}
+	r&\rightarrow -r\\	
+	p&\rightarrow -p\\	
+	S&\rightarrow S\\	
+	L&\rightarrow L	
+.\end{align*}
+And under $\Theta$ :\\
+\begin{align*}
+	r&\rightarrow r\\	
+	p&\rightarrow -p\\	
+	S&\rightarrow -S\\	
+	L&\rightarrow -L	
+.\end{align*}
+
+\begin{align*}
+	\text{\eqref{sp}}&\rightarrow \Pi\boldsymbol{S}\cdot\boldsymbol{p}\Pi^{-1} =\ -\boldsymbol{S}\cdot\boldsymbol{p} \\
+	\text{\eqref{sr}}&\rightarrow \Pi\boldsymbol{S}\cdot\boldsymbol{r}\Pi^{-1} =\ -\boldsymbol{S}\cdot\boldsymbol{r} \\
+	\text{\eqref{sl}}&\rightarrow \Pi\boldsymbol{S}\cdot\boldsymbol{L}\Pi^{-1} =\ \boldsymbol{S}\cdot\boldsymbol{L} \\
+	\text{\eqref{ss}}&\rightarrow \Pi\boldsymbol{S}\cdot\boldsymbol{S}\Pi^{-1} =\ \boldsymbol{S}\cdot\boldsymbol{S}\\
+	\text{\eqref{sp}}&\rightarrow \Theta\boldsymbol{S}\cdot\boldsymbol{p}\Theta^{-1} =\ \boldsymbol{S}\cdot\boldsymbol{p} \\
+	\text{\eqref{sr}}&\rightarrow \Theta\boldsymbol{S}\cdot\boldsymbol{r}\Theta^{-1} =\ -\boldsymbol{S}\cdot\boldsymbol{r} \\
+	\text{\eqref{sl}}&\rightarrow \Theta\boldsymbol{S}\cdot\boldsymbol{L}\Theta^{-1} =\ \boldsymbol{S}\cdot\boldsymbol{L} \\
+	\text{\eqref{ss}}&\rightarrow \Theta\boldsymbol{S}\cdot\boldsymbol{S}\Theta^{-1} =\ \boldsymbol{S}\cdot\boldsymbol{S}
+.\end{align*}
+\end{question}
+\newpage
+\begin{question}[title = Question 5]{}{}
+Given a spinless undegenerate system which upholds:\\
+\[
+	\left[H,\Theta\right]=0 
+.\] 
+Prove that it is posible to choose the eignkets of the system to be real in the Position-Space.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+The undegeneracy means:\\
+\[
+	H|\psi\rangle=E_n|\psi\rangle  
+.\] 
+Where $E_n$ are uniqe.\\
+Let us reverse the time:\\
+\[
+	\Theta H|\psi\rangle=E_n\Theta|\psi\rangle  
+.\] 
+And use the commutation relation:\\
+\[
+	H\Theta|\psi\rangle=E_n\Theta|\psi\rangle  
+.\] 
+Firstly we'll note that $|\psi\rangle=\Theta|\psi\rangle$ for $E_n$ are uniqe.\\
+Now let us recall that in the Position-Space the eignkets and the eignkets after time reversal are $\langle x|\psi\rangle$ and $\langle x|\psi\rangle^*$ respectivly. Hence:\\
+\[
+	\langle x|\psi\rangle = \langle x|\psi\rangle^*
+.\] 
+
+\end{question}
+\begin{question}[title = Question 6]{}{}
+Partical with spin $s=\frac{1}{2}$ is under the influence of a magnetic field:\\
+\[
+	\boldsymbol{B}\left(t\right)=B_{\perp} \left[\cos\left(\omega t\right)\hat{\boldsymbol{x}}+\sin\left(\omega t\right)\hat{\boldsymbol{y}}\right]+B_0\boldsymbol{\hat{z}}  	
+.\] 
+\begin{question}[title = Parts 1+2]{}{}
+Write the hemiltonian in the base which diagonalize $S_z $ using the pauli matrices.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{align*}
+	H =&\ -\vec{M}\cdot \vec{B}\\
+	=&\ \frac{e}{2mc}\vec{S}\cdot \vec{B}\\
+	=&\ \frac{e\hslash}{2mc}\frac{\vec{S}}{\hslash}\cdot \vec{B}\\
+	\approx&\ \frac{1}{2}g\mu_B \vec{\sigma}\cdot \vec{B}\\
+	=&\ \frac{1}{2}g\mu_B \left[B_{\perp}\sigma_x\cos\left(\omega t\right)+B_{\perp}\sigma_y\sin\left(\omega t\right)+B_0\sigma_z\right] = 
+	\begin{pmatrix}
+		B_0 & B_{\perp}e^{-i\omega t}\\
+		B_{\perp}e^{i\omega t} & B_0
+	\end{pmatrix}\\
+	=&\ \frac{1}{4}g\mu_B \left[B_{\perp}\sigma_x\left(e^{i\omega t}+e^{-i\omega t}\right) -iB_{\perp}\sigma_y\left(e^{i\omega t}-e^{-i\omega t}\right)+B_0\sigma_z\right] \\
+	=&\ \frac{1}{4}g\mu_B \left[B_{\perp}e^{i\omega t}\underbrace{\left(\sigma_x-i\sigma_y\right)}_{\propto S_{-}}+B_{\perp}e^{-i\omega t}\underbrace{\left(\sigma_x+i\sigma_y\right)}_{\propto S_{+}}+B_0\sigma_z\right]
+.\end{align*}
+\end{question}
+\begin{question}[title = Part 3]{}{}
+Let $U$ be a unitary transformation $|\bar{\psi}\rangle=U|\psi\rangle$.\\
+Show that $\mathcal{H}$ must transform as such:\\
+ \[
+	\bar{\mathcal{H}}=U\mathcal{H}U^{\dagger}+i\hslash\frac{\partial U}{\partial t}U^{\dag} 
+.\] 
+To uphold the schrodiger equation:\\
+\[
+	\bar{\mathcal{H}}|\bar{\psi}\rangle=i\hslash\frac{\partial}{\partial t}|\bar{\psi}\rangle 
+.\]
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+By transforming the RHS:\\
+\begin{align*}
+	i\hslash\frac{\partial}{\partial t}|\bar{\psi}\rangle=i\hslash\frac{\partial}{\partial t}U|\psi\rangle =&\ i\hslash\left(\frac{\partial U}{\partial t}|\psi\rangle+U\frac{\partial|\psi\rangle}{\partial t}\right)\\
+	 =&\ i\hslash\left(\frac{\partial U}{\partial t}U^{\dag}U|\psi\rangle+U\left(\frac{1}{i\hslash}\mathcal{H}|\psi\rangle \right) \right)\\
+	 =&\ i\hslash\left(\frac{\partial U}{\partial t}U^{\dag}U|\psi\rangle+\frac{1}{i\hslash}U\left(\mathcal{H}U^{\dag}U|\psi\rangle \right) \right)\\
+	 =&\ \underbrace{\left(i\hslash\frac{\partial U}{\partial t}U^{\dag}+U\mathcal{H}U^{\dag}\right)}_{\bar{\mathcal{H}}} \underbrace{U|\psi\rangle}_{|\bar{\psi}\rangle }
+\end{align*}
+\end{question}
+\begin{question}[title = Part 4]{}{}
+Let $U$ the transformation be:\\
+\[
+	U=e^{i \frac{S_z}{\hslash}\Omega_0t}
+.\] 
+Write $U$ in the diagonalizing base of $S_z$ and find $\bar{\mathcal{H}}$.\\
+What $\Omega_0$ must be so $\bar{\mathcal{H}}$ will be time independent?
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+$U$ is comprised solely from $S_z$ hence:\\
+ \[
+	U=
+	\begin{pmatrix}
+		e^{i \frac{\Omega_0}{2}t} & 0\\
+		0 & e^{-i \frac{\Omega_0}{2}t}
+	\end{pmatrix}
+.\] 
+And due to the previeus part:\\
+\begin{align*}
+	\bar{\mathcal{H}} \propto&\ 
+	\begin{pmatrix}
+		e^{i \frac{\Omega_0}{2}t} & 0\\
+		0 & e^{-i \frac{\Omega_0}{2}t}
+	\end{pmatrix}
+	\begin{pmatrix}
+		B_0 & B_{\perp}e^{-i\omega t}\\
+		B_{\perp}e^{i\omega t} & B_0
+	\end{pmatrix}
+	\begin{pmatrix}
+		e^{-i \frac{\Omega_0}{2}t} & 0\\
+		0 & e^{i \frac{\Omega_0}{2}t}
+	\end{pmatrix}+
+	\begin{pmatrix}
+		-\frac{\Omega_0}{2}\hslash & 0\\
+		0 & \frac{\Omega_0}{2}\hslash
+	\end{pmatrix}\\
+	 =&\ \begin{pmatrix}
+		B_0-\frac{\Omega_0}{2}\hslash & B_{\perp}e^{i\left(\Omega_0-\omega\right) t}\\
+		B_{\perp}e^{i\left(\omega-\Omega_0\right) t} & -B_0+\frac{\Omega_0}{2}\hslash
+	\end{pmatrix}
+.\end{align*}
+So for $\bar{\mathcal{H}}$ to be time independent $\Omega_0=\omega$.
+\end{question}
+From here on out I wo'nt show all the calculations, writing everything in \LaTeX\xspace is too much for me right now.
+\begin{question}[title = Part 5]{}{}
+	Find the eigenkets and eigen energies of $\bar{\mathcal{H}}$
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+Because $U$ is just a transformation of our choise we'll pick $\Omega_0=\omega$ such that $\bar{\mathcal{H}}$ will be time independent:\\
+\[
+	\bar{\mathcal{H}}=
+	\begin{pmatrix}
+		B_0-\frac{\Omega_0}{2}\hslash & B_{\perp}\\
+		B_{\perp} & -B_0+\frac{\Omega_0}{2}\hslash
+	\end{pmatrix}
+.\] 
+We'll define a modified magnetic field $B^\prime=B_0-\frac{\Omega_0}{2}\hslash$ and find the eigen-energies:\\
+ \[
+	 E_{\pm}=\pm\sqrt{B^{\prime}{}^2+B_\perp^2} 	
+.\] 
+And define:\\
+\[
+	E\equiv|E_\pm|=\sqrt{B^{\prime}{}^2+B_\perp^2}
+.\] 
+And the normelized eigenkets:\\
+\begin{align*}
+	|+\rangle=\frac{1}{\sqrt{2E\left(E+B^\prime\right) }}
+	\begin{pmatrix}
+		B^\prime+E\\
+		B_{\perp}
+	\end{pmatrix}\\
+	|-\rangle=\frac{1}{\sqrt{2E\left(E-B^\prime\right)}}
+	\begin{pmatrix}
+		B^\prime-E\\
+		B_{\perp}
+	\end{pmatrix}
+.\end{align*}
+\end{question}
+\begin{question}[title = Part 6]{}{}
+In $t=0$ the state of the system $|\psi\left(0\right) \rangle=|\uparrow\rangle  $.\\
+What's the probability to find the system in the state $|\downarrow\rangle$ after time $t$?
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{align*}
+	|\psi\left(0\right) \rangle=|\uparrow\rangle =&\ \langle+|\uparrow\rangle|+\rangle+\langle-|\uparrow\rangle|-\rangle  \\
+	=&\ \langle\uparrow|+\rangle|+\rangle+\langle\uparrow|-\rangle|-\rangle  \\
+	\Downarrow&\\
+	|\psi\left(t\right) \rangle =&\ \langle\uparrow|+\rangle e^{-i \frac{E}{\hslash}t}|+\rangle+\langle\uparrow|-\rangle e^{i \frac{E}{\hslash}t}|-\rangle \\
+	\langle\downarrow|\psi\left(t\right) \rangle =&\ \langle\uparrow|+\rangle \langle\downarrow|+\rangle e^{-i \frac{E}{\hslash}t}+\langle\uparrow|-\rangle \langle\downarrow|-\rangle e^{i \frac{E}{\hslash}t} \\
+	 =&\ \frac{B_\perp}{2E}e^{-i \frac{E}{\hslash}t}- \frac{B_\perp}{2E}e^{-i \frac{E}{\hslash}t}\\
+	 P_t\left(|\downarrow\rangle \right) =&\ |\langle\downarrow|\psi\left(t\right) \rangle|^2 = \boxed{\frac{B^2_\perp}{4E^2}\sin^2\left(\frac{E}{\hslash}t\right)} 
+.\end{align*}
+\end{question}
+\end{question}
+\end{document}

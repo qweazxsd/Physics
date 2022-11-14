@@ -1,0 +1,881 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass heb-article
+\use_default_options true
+\maintain_unincluded_children false
+\language hebrew
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "David CLM"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\headsep 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0cm
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+תרגיל בית
+\family roman
+\series medium
+\shape up
+\size largest
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+ | קוונטים
+\family roman
+\series medium
+\shape up
+\size largest
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\end_layout
+
+\begin_layout Author
+אלון נר גאון
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+שאלה 
+\numeric on
+1
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E & =-1.511eV\ \Rightarrow\ \boxed{n=3}\\
+\Rightarrow & l:0\rightarrow2\quad;\quad m:-2\rightarrow2
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+כל אחד מן הרכיבים 
+\begin_inset Formula $\left(L_{x},L_{y},L_{z}\right)$
+\end_inset
+
+ יכול לקבל אחד מן הערכים האפשריים ל - 
+\begin_inset Formula $m$
+\end_inset
+
+, כלומר 
+\begin_inset Formula $\boxed{-2\hslash,-\hslash,0,\hslash,2\hslash}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+אם נמדד 
+\begin_inset Formula $m=-1$
+\end_inset
+
+ אז נפסלת האפשרות ש - 
+\begin_inset Formula $l=0$
+\end_inset
+
+ ולכן נשארים עם האפשרויות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $l=1,2$
+\end_inset
+
+.
+ בנוסף 
+\begin_inset Formula $L^{2}=l\left(l+1\right)$
+\end_inset
+
+ ולכן האפשרויות הן 
+\begin_inset Formula $\boxed{L^{2}=2\hslash^{2},6\hslash^{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+לא, משום שהתחלנו ממצב עצמי של 
+\begin_inset Formula $L_{y}$
+\end_inset
+
+ ו - 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ מתחלף איתו ולכן מדידה של 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ לא תשנה את המצב.
+\end_layout
+
+\begin_layout Enumerate
+כן, משום ש - 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ לא יכול להתחלף עם יותר מרכיב אחד של 
+\begin_inset Formula $\bar{L}$
+\end_inset
+
+ ולשני רכיבים שונים של 
+\begin_inset Formula $\bar{L}$
+\end_inset
+
+ אין אותם מצבים עצמיים.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+שאלה 
+\numeric on
+2
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+e^{i\frac{L_{z}}{\hslash}\theta}\psi\left(\varphi\right) & =\sum_{n=0}^{\infty}\frac{\left(i\frac{L_{z}}{\hslash}\theta\right)^{n}}{n!}\psi\left(\varphi\right)\\
+ & =\sum_{n=0}^{\infty}\frac{\left(\frac{\cancel{i}\theta}{\cancel{\hslash}}\right)^{n}}{n!}\left(\cancel{-i}\cancel{\hslash}\frac{\partial}{\partial\varphi}\right)^{n}\psi\left(\varphi\right)\\
+ & =\sum_{n=0}^{\infty}\frac{\theta^{n}}{n!}\psi^{\left(n\right)}\left(\varphi\right)
+\end{align*}
+
+\end_inset
+
+ וזה כמובן פיתוח לטור של:
+\begin_inset Formula 
+\[
+\psi\left(\varphi+\theta\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+שאלה 
+\numeric on
+3
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{cases}
+Q_{1}=\frac{1}{\sqrt{2}}\left(x+\frac{1}{\alpha}p_{y}\right)\\
+P_{1}=\frac{1}{\sqrt{2}}\left(p_{x}-\alpha y\right)
+\end{cases}\qquad\begin{cases}
+Q_{2}=\frac{1}{\sqrt{2}}\left(x-\frac{1}{\alpha}p_{y}\right)\\
+P_{2}=\frac{1}{\sqrt{2}}\left(p_{x}+\alpha y\right)
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\left[Q_{1},Q_{2}\right] & =\frac{1}{2}\left[x+\frac{1}{\alpha}p_{y},x-\frac{1}{\alpha}p_{y}\right]\\
+ & =\frac{1}{2}\left\{ \left[x,x-\frac{1}{\alpha}p_{y}\right]+\frac{1}{\alpha}\left[p_{y},x-\frac{1}{\alpha}p_{y}\right]\right\} \\
+ & =\frac{1}{2}\left\{ \left[x,x\right]-\frac{1}{\alpha}\left[x,p_{y}\right]+\frac{1}{\alpha}\left[p_{y},x\right]-\frac{1}{\alpha^{2}}\left[p_{y},p_{y}\right]\right\} \\
+ & =\boxed{0}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left[P_{1},P_{2}\right] & =\frac{1}{2}\left[p_{x}-\alpha y,p_{x}+\alpha y\right]\\
+ & =\frac{1}{2}\left\{ \left[p_{x},p_{x}+\alpha y\right]-\alpha\left[y,p_{x}+\alpha y\right]\right\} \\
+ & =\frac{1}{2}\left\{ \left[p_{x},p_{x}\right]+\alpha\left[p_{x},y\right]-\alpha\left[y,p_{x}\right]-\alpha^{2}\left[y,y\right]\right\} \\
+ & =\boxed{0}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left[Q_{1},P_{2}\right] & =\frac{1}{2}\left[x+\frac{1}{\alpha}p_{y},p_{x}+\alpha y\right]\\
+ & =\frac{1}{2}\left\{ \left[x,p_{x}+\alpha y\right]+\frac{1}{\alpha}\left[p_{y},p_{x}+\alpha y\right]\right\} \\
+ & =\frac{1}{2}\left\{ {\color{gray}\underset{i\hslash}{\underbrace{{\normalcolor \left[x,p_{x}\right]}}}}+\alpha\left[x,y\right]+\frac{1}{\alpha}\left[p_{y},p_{x}\right]+{\color{gray}\underset{-i\hslash}{\underbrace{{\normalcolor \left[p_{y},y\right]}}}}\right\} \\
+ & =\boxed{0}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left[Q_{2},P_{1}\right] & =\frac{1}{2}\left[x-\frac{1}{\alpha}p_{y},p_{x}-\alpha y\right]\\
+ & =\frac{1}{2}\left\{ \left[x,p_{x}-\alpha y\right]-\frac{1}{\alpha}\left[p_{y},p_{x}-\alpha y\right]\right\} \\
+ & =\frac{1}{2}\left\{ \left[x,p_{x}\right]-\alpha\left[x,y\right]-\frac{1}{\alpha}\left[p_{y},p_{x}\right]-\left[p_{y},y\right]\right\} \\
+ & =\boxed{0}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left[Q_{1},P_{1}\right] & =\frac{1}{2}\left[x+\frac{1}{\alpha}p_{y},p_{x}-\alpha y\right]\\
+ & =\frac{1}{2}\left\{ \left[x,p_{x}+\alpha y\right]+\frac{1}{\alpha}\left[p_{y},p_{x}-\alpha y\right]\right\} \\
+ & =\frac{1}{2}\left\{ {\color{gray}\underset{i\hslash}{\underbrace{{\normalcolor \left[x,p_{x}\right]}}}}+\alpha\left[x,y\right]+\frac{1}{\alpha}\left[p_{y},p_{x}\right]-{\color{gray}\underset{-i\hslash}{\underbrace{{\normalcolor \left[p_{y},y\right]}}}}\right\} \\
+ & =\boxed{i\hslash}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left[Q_{2},P_{2}\right] & =\frac{1}{2}\left[x-\frac{1}{\alpha}p_{y},p_{x}+\alpha y\right]\\
+ & =\frac{1}{2}\left\{ \left[x,p_{x}+\alpha y\right]-\frac{1}{\alpha}\left[p_{y},p_{x}+\alpha y\right]\right\} \\
+ & =\frac{1}{2}\left\{ {\color{gray}\underset{i\hslash}{\underbrace{{\normalcolor \left[x,p_{x}\right]}}}}+\alpha\left[x,y\right]-\frac{1}{\alpha}\left[p_{y},p_{x}\right]-{\color{gray}\underset{-i\hslash}{\underbrace{{\normalcolor \left[p_{y},y\right]}}}}\right\} \\
+ & =\boxed{i\hslash}
+\end{align*}
+
+\end_inset
+
+ובסך הכל
+\begin_inset Formula 
+\[
+\boxed{\left[Q_{i},P_{j}\right]=i\hslash\delta_{ij}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+בצורה מטריצית הטרנספורמציה נראית כך:
+\begin_inset Formula 
+\[
+\begin{pmatrix}Q_{1}\\
+P_{1}\\
+Q_{2}\\
+P_{2}
+\end{pmatrix}=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 0 & 0 & \frac{1}{\alpha}\\
+0 & 1 & -\alpha & 0\\
+1 & 0 & 0 & -\frac{1}{\alpha}\\
+0 & 1 & \alpha & 0
+\end{pmatrix}\begin{pmatrix}x\\
+p_{x}\\
+y\\
+p_{y}
+\end{pmatrix}
+\]
+
+\end_inset
+
+וההופכית:
+\begin_inset Formula 
+\[
+\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 0 & 0 & \frac{1}{\alpha}\\
+0 & 1 & -\alpha & 0\\
+1 & 0 & 0 & -\frac{1}{\alpha}\\
+0 & 1 & \alpha & 0
+\end{pmatrix}^{-1}=\begin{pmatrix}\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} & 0\\
+0 & \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}}\\
+0 & \frac{-1}{\sqrt{2}\alpha} & 0 & \frac{1}{\sqrt{2}\alpha}\\
+\frac{\alpha}{\sqrt{2}} & 0 & \frac{-\alpha}{\sqrt{2}} & 0
+\end{pmatrix}
+\]
+
+\end_inset
+
+כלומר:
+\begin_inset Formula 
+\[
+\begin{pmatrix}x\\
+p_{x}\\
+y\\
+p_{y}
+\end{pmatrix}=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 0 & 1 & 0\\
+0 & 1 & 0 & 1\\
+0 & -\frac{1}{\alpha} & 0 & \frac{1}{\alpha}\\
+\alpha & 0 & -\alpha & 0
+\end{pmatrix}\begin{pmatrix}Q_{1}\\
+P_{1}\\
+Q_{2}\\
+P_{2}
+\end{pmatrix}
+\]
+
+\end_inset
+
+ועפ"י ההגדרה:
+\begin_inset Formula 
+\begin{align*}
+L_{z}=xp_{y}-yp_{x} & =\frac{\alpha}{2}\left(Q_{1}+Q_{2}\right)\left(Q_{1}-Q_{2}\right)-\frac{1}{2\alpha}\left(P_{2}-P_{1}\right)\left(P_{2}+P_{1}\right)\\
+ & =\frac{\alpha}{2}\left(Q_{1}^{2}-Q_{2}^{2}\right)-\frac{1}{2\alpha}\left(P_{2}^{2}-P_{1}^{2}\right)\\
+ & =\boxed{{\color{gray}\underset{H_{1}^{\left(n\right)}}{\underbrace{{\normalcolor \left(\frac{1}{2\alpha}P_{1}^{2}+\frac{\alpha}{2}Q_{1}^{2}\right)}}}}-{\color{gray}\underset{H_{2}^{\left(k\right)}}{\underbrace{{\normalcolor \left(\frac{1}{2\alpha}P_{2}^{2}+\frac{\alpha}{2}Q_{2}^{2}\right)}}}}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+ניתן לראות כי התנ"ז הרמוני בקואו' אלה ולכן בהפעלתו על מצב עצמי שלו 
+\begin_inset Formula $\left|\varphi\right\rangle $
+\end_inset
+
+ )קל להראות ש - 
+\begin_inset Formula $\left[L_{z},H_{i}\right]=0$
+\end_inset
+
+ ולכן 
+\begin_inset Formula $\left|\varphi\right\rangle $
+\end_inset
+
+ גם מצב עצמי של 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $H_{i}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+(:
+\begin_inset Formula 
+\[
+L_{z}\left|\varphi\right\rangle =\left(H_{1}-H_{2}\right)\left|\varphi\right\rangle =\left(n-k\right)\left|\varphi\right\rangle 
+\]
+
+\end_inset
+
+ומאחר ש - 
+\begin_inset Formula $n,k$
+\end_inset
+
+ חצי שלמים 
+\begin_inset Formula $m=n-k$
+\end_inset
+
+ שלם.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+שאלה 
+\numeric on
+4
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbf{A}=\frac{1}{2}\mathbf{B}\times\mathbf{r}=\begin{pmatrix}-\frac{By}{2}\\
+\frac{Bx}{2}\\
+0
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+קל לראות ש - 
+\begin_inset Formula $\partial_{i}A_{i}=0$
+\end_inset
+
+ וגם:
+\begin_inset Formula 
+\[
+\nabla\times A=\begin{pmatrix}\frac{\partial}{\partial x}\\
+\frac{\partial}{\partial y}\\
+\frac{\partial}{\partial z}
+\end{pmatrix}\times\begin{pmatrix}-\frac{By}{2}\\
+\frac{Bx}{2}\\
+0
+\end{pmatrix}=\begin{pmatrix}\frac{\partial}{\partial z}\frac{Bx}{2}\\
+-\frac{\partial}{\partial z}\frac{By}{2}\\
+\frac{\partial}{\partial x}\frac{Bx}{2}+\frac{\partial}{\partial y}\frac{By}{2}
+\end{pmatrix}=\begin{pmatrix}0\\
+0\\
+B
+\end{pmatrix}=\mathbf{B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+H & =\frac{1}{2m}\left(\mathbf{p}-\frac{q}{c}\mathbf{A}\right)^{2}=\frac{1}{2m}\left(\mathbf{p}-\frac{q}{c}\begin{pmatrix}-\frac{By}{2}\\
+\frac{Bx}{2}\\
+0
+\end{pmatrix}\right)^{2}\\
+ & =\frac{\left(p_{x}+\frac{qB}{2c}y\right)^{2}}{2m}+\frac{\left(p_{y}-\frac{qB}{2c}x\right)^{2}}{2m}+\frac{p_{z}^{2}}{2m}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+נעבור למשתנים חסרי מימד ונשמיט את האיבר האחרון שכן התנועה מוגבלת למישור
+ 
+\begin_inset Formula $xy$
+\end_inset
+
+ ולכן תמיד עבור החלקיק 
+\begin_inset Formula $p_{z}=0$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+H=\frac{1}{2m}\left(\frac{qB}{c}\right)^{2}\left(\frac{c}{qB}p_{x}+\frac{1}{2}y\right)^{2}+\frac{1}{2m}\left(\frac{qB}{c}\right)^{2}\left(\frac{c}{qB}p_{y}-\frac{1}{2}x\right)^{2}
+\]
+
+\end_inset
+
+כמו בתרגול נוכל לזהות את תדירות הציקלוטרון 
+\begin_inset Formula $\omega_{c}\equiv\frac{qB}{mc}$
+\end_inset
+
+ )ואז סקאלת הזמן היא 
+\begin_inset Formula $\frac{1}{\omega_{c}}$
+\end_inset
+
+( וסקאלת האנרגיה 
+\begin_inset Formula $\hslash\omega_{c}$
+\end_inset
+
+, לכן כדי לעבור להמילטוניאן חסר יחידות 
+\begin_inset Formula $\tilde{H}$
+\end_inset
+
+ נחלק הכל ב - 
+\begin_inset Formula $\hslash\omega_{c}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\tilde{H}=\frac{1}{2}\left(\frac{c}{\hslash qB}p_{x}+\frac{1}{2}\sqrt{\frac{qB}{\hslash c}}y\right)^{2}+\frac{1}{2}\left(\frac{c}{\hslash qB}p_{y}-\frac{1}{2}\sqrt{\frac{qB}{\hslash c}}x\right)^{2}
+\]
+
+\end_inset
+
+וכעת ניתן לראות שסקאלת האורך היא 
+\begin_inset Formula $\nicefrac{1}{\sqrt{\frac{qB}{\hslash c}}}$
+\end_inset
+
+ ונוכל להגדיר 
+\begin_inset Formula $\tilde{x}\equiv\sqrt{\frac{qB}{\hslash c}}x$
+\end_inset
+
+ וכו' אבל נתעלם מכל התילדות ונרשום:
+\begin_inset Formula 
+\[
+H=\frac{1}{2}\left[\left(p_{x}+\frac{1}{2}y\right)^{2}+\left(\frac{1}{2}x-p_{y}\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\[
+\begin{cases}
+Q_{1}=\frac{1}{2}x+p_{y}\\
+P_{1}=p_{x}-\frac{1}{2}y
+\end{cases}\qquad\begin{cases}
+Q_{2}=\frac{1}{2}x-p_{y}\\
+P_{2}=p_{x}+\frac{1}{2}y
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{cases}
+a=\frac{1}{\sqrt{2}}\left(Q_{1}+iP_{1}\right)\\
+a^{\dagger}=\frac{1}{\sqrt{2}}\left(Q_{1}-iP_{1}\right)
+\end{cases}\qquad\begin{cases}
+b=\frac{1}{\sqrt{2}}\left(Q_{2}+iP_{2}\right)\\
+b^{\dagger}=\frac{1}{\sqrt{2}}\left(Q_{2}-iP_{2}\right)
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H=\frac{1}{2}\left(P_{2}^{2}+Q_{2}^{2}\right)
+\]
+
+\end_inset
+
+נזכור שכאן בניגוד לתרגיל הקודם המשתנים הקנוניים חסרי יחידות ולכן יחס החילוף
+ שלהם הוא 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $i$
+\end_inset
+
+ בניגוד למקודם 
+\begin_inset Formula $i\hslash$
+\end_inset
+
+: 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{align*}
+b^{\dagger} & b=\frac{1}{2}\left(Q_{2}-iP_{2}\right)\left(Q_{2}+iP_{2}\right)\\
+ & =\frac{1}{2}\left(Q_{2}^{2}+iQ_{2}P_{2}-iP_{2}Q_{2}+P_{2}^{2}\right)\\
+ & =\frac{1}{2}\left(Q_{2}^{2}+i\left[Q_{2},P_{2}\right]+P_{2}^{2}\right)\\
+ & =H-\frac{1}{2}\\
+ & \Downarrow\\
+H & =b^{\dagger}b+\frac{1}{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+בשאלה הקודמת כבר מצאנו שניתן לכתוב את 
+\begin_inset Formula $L_{z}\left(Q_{i},P_{j}\right)$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+L_{z}=xp_{y}-yp_{x} & =\frac{1}{2}\left(Q_{1}+Q_{2}\right)\left(Q_{1}-Q_{2}\right)-\frac{1}{2}\left(P_{2}-P_{1}\right)\left(P_{2}+P_{1}\right)\\
+ & =\frac{1}{2}\left(Q_{1}^{2}-Q_{2}^{2}\right)-\frac{1}{2}\left(P_{2}^{2}-P_{1}^{2}\right)\\
+ & =\frac{1}{2}Q_{1}^{2}+\frac{1}{2}P_{1}^{2}-\left(\frac{1}{2}Q_{2}^{2}+\frac{1}{2}P_{2}^{2}\right)\\
+ & =a^{\dagger}a-\cancel{\frac{i}{2}\left[Q_{1},P_{1}\right]}-\left(b^{\dagger}b-\cancel{\frac{i}{2}\left[Q_{2},P_{2}\right]}\right)\\
+ & =\boxed{a^{\dagger}a-b^{\dagger}b}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\left[L_{z},H\right] & =\left[a^{\dagger}a-b^{\dagger}b,b^{\dagger}b+\frac{1}{2}\right]\\
+ & =\left[a^{\dagger}a,b^{\dagger}b\right]\\
+ & =\frac{1}{2}\left[Q_{1}^{2}+i\left[Q_{1},P_{1}\right]+P_{1}^{2},Q_{2}^{2}+i\left[Q_{2},P_{2}\right]+P_{2}^{2}\right]\\
+ & =\frac{1}{2}\left\{ \left[Q_{1}^{2},Q_{2}^{2}+i\left[Q_{2},P_{2}\right]+P_{2}^{2}\right]+\left[P_{1}^{2},Q_{2}^{2}+i\left[Q_{2},P_{2}\right]+P_{2}^{2}\right]\right\} \\
+ & =0
+\end{align*}
+
+\end_inset
+
+מכיוון שהאופרטורים מתחלפים:
+\begin_inset Formula 
+\[
+\begin{cases}
+H\left|nm\right\rangle =\left(n+\frac{1}{2}\right)\left|nm\right\rangle \\
+L_{z}\left|nm\right\rangle =m\hslash\left|nm\right\rangle 
+\end{cases}
+\]
+
+\end_inset
+
+וניתן לראות שהאנרגיות העצמיות אינן תלויות ב - 
+\begin_inset Formula $m$
+\end_inset
+
+ ולכן יש ניוון אינסופי בדיוק כמו בתרגול: המ"ע של המערכת תלויים בשני מספרים
+ קוונטיים אבל האנרגיות העצמיות תלויות רק באחד, כלומר יש אינסוף מ"ע עם אותה
+ אנרגיה.
+\end_layout
+
+\begin_layout Enumerate
+מכיוון ש - 
+\begin_inset Formula $b,\ b^{\dagger}$
+\end_inset
+
+ מתחלפים עם 
+\begin_inset Formula $a,\ a^{\dagger}$
+\end_inset
+
+ ניתן להסיע את 
+\begin_inset Formula $b$
+\end_inset
+
+ דרך 
+\begin_inset Formula $a$
+\end_inset
+
+ )או ההיפך( בחינם )דאגר או לא דאגר(:
+\begin_inset Formula 
+\begin{align*}
+L_{z}b^{\dagger}\left|m\right\rangle  & =\left(a^{\dagger}a-b^{\dagger}b\right)b^{\dagger}\left|m\right\rangle \\
+ & =a^{\dagger}ab^{\dagger}\left|m\right\rangle -b^{\dagger}bb^{\dagger}\left|m\right\rangle \\
+ & =b^{\dagger}a^{\dagger}a\left|m\right\rangle -b^{\dagger}\left(b^{\dagger}b+1\right)\left|m\right\rangle \\
+ & =b^{\dagger}\left(a^{\dagger}a-\left(b^{\dagger}b+1\right)\right)\left|m\right\rangle \\
+ & =b^{\dagger}\left(L_{z}-1\right)\left|m\right\rangle \\
+ & =\left(m-1\right)\hslash b^{\dagger}\left|m\right\rangle \\
+ & \Downarrow\\
+b^{\dagger}\left|m\right\rangle  & \propto\left|m-1\right\rangle 
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+L_{z}a^{\dagger}\left|m\right\rangle  & =\left(a^{\dagger}a-b^{\dagger}b\right)a^{\dagger}\left|m\right\rangle \\
+ & =a^{\dagger}aa^{\dagger}\left|m\right\rangle -b^{\dagger}ba^{\dagger}\left|m\right\rangle \\
+ & =a^{\dagger}\left(a^{\dagger}a+1\right)\left|m\right\rangle -a^{\dagger}b^{\dagger}b\left|m\right\rangle \\
+ & =a^{\dagger}\left(a^{\dagger}a+1-b^{\dagger}b\right)\left|m\right\rangle \\
+ & =a^{\dagger}\left(L_{z}+1\right)\left|m\right\rangle \\
+ & =\left(m+1\right)\hslash a^{\dagger}\left|m\right\rangle \\
+ & \Downarrow\\
+a^{\dagger}\left|m\right\rangle  & \propto\left|m+1\right\rangle 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document

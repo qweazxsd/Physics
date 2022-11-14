@@ -1,0 +1,189 @@
+\documentclass[notitlepage]{report}
+
+\input{~/Physics/Latex/preamble}
+\input{~/Physics/Latex/macros}
+\input{~/Physics/Latex/letterfonts}
+
+\title{\Huge{Intro. to Solid state}\\Exercise 2}
+\author{Alon Ner Gaon}
+
+\begin{document}
+
+\maketitle
+
+\begin{question}{}{}
+	Given that:\\
+	 \[
+	\bar{J}=n_eq_e\bar{v}_e+n_hq_h\bar{v}_h
+	.\] 
+	What is the electrical conductivity $\sigma$ under a DC field?
+	\tcblower
+	\textbf{\emph{\underline{Solution}:}}\\
+
+Drude equation of motion:\\
+\[
+\frac{d}{dt}\bar{p}= - \frac{\bar{p}}{t}+q\bar{E} 
+.\] 
+So for every charge carier:\\
+\[
+\bar{p}_i=q_i\tau\bar{E}
+.\] 
+And if we multiply by the correct units:\\
+\[
+n_iq_i\bar{v}_i=\frac{n_iq_i^2\tau}{m_i}\bar{E}
+.\] 
+We get exactly the equation for the flow $\bar{J}$:\\
+\[
+\bar{J}=\frac{n_iq_i^2\tau}{m_i}\bar{E}
+.\] 
+And if we add up for the two charge cariers:\\
+\[
+	\bar{J}=\left(\frac{n_eq_e^2\tau_e}{m_e}+\frac{n_hq_h^2\tau_h}{m_h}\right) \bar{E}
+.\] 
+We get:\\
+\[
+\sigma=\frac{n_eq_e^2\tau_e}{m_e}+\frac{n_hq_h^2\tau_h}{m_h}
+.\] 
+As expected if there's no interaction between the electrons and the holes 
+the total conductivity is the sum of the two independet conductivities.
+
+\end{question}
+
+\begin{question}{}{}
+	Show that: \[
+	\bar{J}=\frac{e\tau}{m}k_BT\nabla n
+	.\] 
+	\tcblower
+	\textbf{\emph{\underline{Solution}:}}\\
+\begin{align*}
+	J_x&=-\frac{e}{2}\left[n\left(x-v_x\tau\right)v_x-n\left(x+v_x\tau\right)v_x  \right] \\
+	J_x&\approx-ev_x^2 \tau\frac{d}{dx} n=-e\tau \frac{1}{3} \langle v^2 \rangle \frac{d}{dx} n=-e\tau \frac{2}{3m}\langle \epsilon \rangle \frac{d}{dx} n\\
+.\end{align*}
+	Every particle has $\frac{3}{2}k_BT$ from the Equipartition Theorem:\\
+	\[
+	\bar{J}-\frac{e\tau}{m}k_BT\bar{\nabla}n
+	.\] 
+\end{question}
+
+\begin{question}[title = Question 3.1]{}{}
+	Given:\\
+\begin{align*}
+	\bar{H} =&\  H\hat{z}\\
+	\bar{E} =&\  \bar{E}\left(\omega\right)e^{-i\omega t} 
+.\end{align*}
+And:\\
+\[
+E_y=iE_x\qquad E_z=0
+.\]
+Show that:\\
+\[
+\tau\frac{\text{d}}{\text{d}t}\bar{J}\left(t\right)=-\bar{J}\left(t\right)+\sigma_D\bar{E}\left(t\right)-\omega_c\tau\left(\bar{J}\left(t\right) \times \hat{z}\right)  
+.\] 
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\
+
+Drude equation of motion of a particle in an EM field:\\
+\[
+\frac{d}{dt}\bar{p}= - \frac{\bar{p}}{\tau}-\frac{e}{c}\left[\bar{E}+\bar{v}\times\bar{H}\right]  
+.\] 
+And with units of the flow $\bar{J}$ :\\
+\begin{align}
+	\frac{n\tau e}{m}\frac{d}{dt}\bar{p} =&\ - ne\frac{\bar{p}}{\tau}-\frac{ne^2\tau}{m}\left[\bar{E}+\frac{1}{c}\bar{v}\times\bar{H}\right]\notag\\
+	\Rightarrow -\tau	\frac{\text{d}}{\text{d}t}\bar{J} =&\  \bar{J}-\sigma_D\bar{E}-\underbrace{\frac{ne^2\tau}{mc}\bar{v}\times \bar{H}}_{\omega_c\tau\left(\bar{J}\times\hat{z}\right) } \notag\\
+	\Rightarrow \tau	\frac{\text{d}}{\text{d}t}\bar{J} =&\ - \bar{J}+\sigma_D\bar{E}-\omega_c\tau\left(\bar{J}\times\hat{z}\right) \label{eq:1}
+.\end{align}
+\end{question}
+
+\begin{question}[title = Question 3.2]{}{}
+With a solution of the form:\\
+\[
+\vec{J}\left(t\right)=\vec{J}\left(\omega\right) e^{-i\omega t} 
+.\] 
+Show that:\\
+\[
+\vec{J}=\frac{\sigma_D}{1-i\left(\omega-\omega_c\right)\tau }\vec{E}
+.\] 
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+Placing the solution in \eqref{eq:1} we obtain:\\
+\begin{align*}
+	-\tau i\omega \vec{J}\left(\omega\right) = -\vec{J}\left(\omega\right)+\sigma_D \vec{E}\left(\omega\right)-\omega_c\tau\left(\vec{J}\left(\omega\right)\times\hat{z} \right)
+.\end{align*}
+		\begin{numcases}{\Rightarrow }
+			-\tau i \omega J_x =  -J_x +\sigma_D E_x -\omega_c\tau J_y\label{x}\\
+		-\tau i \omega J_y =  -J_y -i\sigma_D E_x +\omega_c\tau J_x\label{y}
+	\end{numcases}
+Now because the metal is isotropic the field can only induce 
+a global phase and scaling on the flow i.e.:\\
+\[
+	\vec{J}\propto\sigma_D e^{-i\Phi}\vec{E}
+.\] 
+Which means that the flow upholds the same relation:
+\[
+	J_y=iJ_x\qquad J_z=0
+.\] 
+This could also be seen by the sum $i$\eqref{x} + \eqref{y}.\\
+Placing in \eqref{x} we obtain:\\
+\begin{align*}
+	-\tau i \omega J_x =&\  -J_x +\sigma_D E_x -i\omega_c\tau J_x\\
+	J_x=&\ \frac{\sigma_D}{1-i\tau\left(\omega -\omega_c\right)} E_x
+.\end{align*}
+And because the flow and the field share the same relation regarding their vector 
+components we obtaioned what we were after.
+\end{question}
+
+\begin{question}[title = Question 4]{}{}
+Show that Maxwell's equations:\\
+\begin{align}
+	\bar{\nabla}\cdot \vec{E}  =&\  \bar{\nabla}\cdot \vec{H} = 0\label{mx1}\\
+	\bar{\nabla}\times \vec{E} =&\  -\frac{1}{c}\frac{\partial}{\partial t}\vec{H}\label{mx2}\\
+	\bar{\nabla}\times \vec{H} =&\  \frac{4\pi}{c}\vec{J}+\frac{1}{c}\frac{\partial}{\partial t}\vec{E}\label{mx3}
+\end{align}
+Under a constant field:\\
+\begin{equation}
+	\vec{H}=H\hat{z}\label{H}
+\end{equation}
+Have a solution of the form:\\
+\[
+	E_x=E_0e^{i\left(kz-\omega t\right)}\quad E_y=iE_x\quad E_z=0
+.\] 
+\tcbbreak
+If the following relations hold:\\
+\begin{align*}
+	k^2c^2 &=\  \epsilon\omega^2\\
+	\epsilon &=\  1-\frac{\omega_p^2}{\omega}\frac{1}{\omega-\omega_c+\frac{i}{\tau}}\\
+	\text{And}\ \omega_p^2 &\equiv \frac{4\pi ne^2}{m}
+\end{align*}
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\
+
+If we take the curl of \eqref{mx2}:\\
+\[
+\bar{\nabla}\times\bar{\nabla}\times \vec{E} =\bar{\nabla}\times-\frac{1}{c}\frac{\partial}{\partial t}\vec{H}\label{mx2}\\
+.\] 
+And substitue \eqref{mx3}:\\
+\begin{align*}
+	\bar{\nabla}\times\bar{\nabla}\times \vec{E} =& -\frac{1}{c}\frac{\partial}{\partial t}\left(\frac{4\pi}{c}\vec{J}+\frac{1}{c}\frac{\partial}{\partial t}\vec{E}\right) \\
+\bar{\nabla}\left(\bar{\nabla}\cdot\vec{E}\right)-\nabla^2 \vec{E}=& -\frac{4\pi}{c^2}\frac{\partial}{\partial t}\vec{J}-\frac{1}{c^2}\frac{\partial^2}{\partial t^2}\vec{E} \\
+\nabla^2 \vec{E}=& \frac{4\pi}{c^2}\frac{\partial}{\partial t}\sigma\left(\omega\right)\vec{E} +\frac{1}{c^2}\frac{\partial^2}{\partial t^2}\vec{E} \\
+-k^2=&-i\omega \frac{4\pi}{c^2}\sigma\left(\omega\right)-\frac{1}{c^2}\omega^2 \\
+k^2c^2=&\ i\omega4\pi\sigma\left(\omega\right)+\omega^2\\
+k^2c^2\overset{!}{=}&\ \omega^2\underbrace{\left(\frac{i4\pi}{\omega}\frac{\sigma_D}{1-i\tau\left(\omega-\omega_c\right) }+1\right)}_{\epsilon\left(\omega\right) }   \\
+\Rightarrow \epsilon\left(\omega\right) =&\ 1-\frac{\omega_p^2}{\omega}\frac{1}{\omega-\omega_c+\frac{i}{\tau}} 
+.\end{align*}
+Under the assumption $\omega\ll\omega_c$:\\
+\[
+\epsilon\left(\omega\right) =\ 1-\frac{\omega_p^2}{\omega}\frac{1}{-\omega_c+\frac{i}{\tau}} 
+.\] 
+And under the assumption $1\ll\omega_c\tau$:\\
+\[
+\epsilon\left(\omega\right) =\ 1+\frac{\omega_p^2}{\omega\omega_c}\tau 
+.\] 
+And under the assumption $\omega_c\ll\omega_p$:\\
+\begin{align*}
+	\epsilon\left(\omega\right) =&\ \frac{4\pi\sigma_D}{\omega\omega_c}\\ 
+	\Rightarrow \omega^2\epsilon\left(\omega\right) =&\ \omega\frac{4\pi\sigma_D}{\omega_c} = k^2c^2\\
+	\omega =& \frac{\omega_ck^2c^2}{4\pi\sigma_D}
+.\end{align*}
+\end{question}
+\end{document}

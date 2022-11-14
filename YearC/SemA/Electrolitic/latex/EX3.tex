@@ -1,0 +1,49 @@
+\documentclass[notitlepage]{report}
+
+\input{~/Physics/Latex/preamble}
+\input{~/Physics/Latex/macros}
+\input{~/Physics/Latex/letterfonts}
+
+\title{\Huge{Electrolitic}\\Exercise 3}
+\author{Alon Ner Gaon}
+
+\begin{document}
+
+\maketitle
+\[
+	F^{\mu\nu}=
+	\begin{pmatrix}
+	 0 & E_x & E_y & E_z\\
+	 -E_x & 0 & -B_z & B_y\\
+	 -E_y & B_z & 0 & -B_x\\
+	 -E_z & -B_y & B_x & 0
+	\end{pmatrix}
+.\] 
+\begin{question}[title = Question 1.1]{}{}
+Show that from the equation:\\
+\[
+	m\frac{\text{d}U^{\mu}}{\text{d}\tau}=\frac{q}{c}F^{\mu\nu}U_\nu
+.\] 
+The lorentz force and the work eq. can be derived.\\
+Which of the fields $\vec{E},\ \vec{B}$ execute work?
+\end{question}
+\textbf{\emph{\underline{Solution}:}}\\
+For $\mu=0$ :\\
+\[
+	m \frac{\text{d}U^{0}}{\text{d}\tau} = \frac{q}{c}\left(\vec{E}\cdot \vec{v}\right)=\frac{1}{c}\left(\vec{f}\cdot \vec{v}\right)=\frac{1}{c}\frac{\text{d}E}{\text{d}t}  
+.\] 
+For $\mu=i$ :\\
+\[
+	m \frac{\text{d}U^{i}}{\text{d}\tau}  =\frac{q}{c}\left(F^{i0}U_0+F^{0i}U_i\right)  = \frac{q}{c}\gamma\left(c \vec{E}+\vec{B}\times \vec{v}\right)  
+.\] 
+Only the electric field execute work because the term $\vec{B}\times \vec{v}$ is perpendicular to $\vec{v}$ and will be nullified in the dot product $\vec{f} \cdot \vec{v}$.
+\begin{question}[title = Question 1.2]{}{}
+Find $\vec{r}\left(t\right) $ of a relativistic particle in a constant magnetic field, and show the non-relativistic approximation. What's the diffrence between the case of a constant electric field and the case of a magnetic one?
+\end{question}
+\textbf{\emph{\underline{Solution}:}}\\
+We'll use our freedom of choise of a coordinate system and pick $\vec{B}$ such that:
+\begin{align*}
+	\vec{B} =&\ B\hat{z}\\
+	\vec{v}\left(t=0\right) =&\ v_{0x}\hat{x}+v_{0y}\hat{y} 
+.\end{align*}
+\end{document}

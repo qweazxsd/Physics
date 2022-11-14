@@ -1,0 +1,313 @@
+\documentclass[notitlepage]{report}
+
+\input{~/Physics/Latex/preamble}
+\input{~/Physics/Latex/macros}
+\input{~/Physics/Latex/letterfonts}
+
+\title{\Huge{QMII}\\Exercise 3}
+\author{Alon Ner Gaon}
+
+\begin{document}
+
+\maketitle
+\begin{question}[title = Question 1]{}{}
+Ginen the transformation $U\left(\lambda\right)=e^{-i\lambda \frac{G}{\hslash}} $ and the generator $G=\frac{1}{2}\left(xp+px\right) $.
+\end{question}
+\begin{question}[title = Part 1]{}{}
+Show how an infinitesimal transformation $U\left(\epsilon\right) $ transforms the position and momentum operators $x,\ p$. 
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+\[
+	U\left(\epsilon\right)\approx 1-i\epsilon \frac{G}{\hslash}=1-i \frac{\epsilon}{2\hslash}\left(xp+px\right) 
+.\] 
+\begin{align*}
+	UxU^{\dag}\approx&\ \left[1-i \frac{\epsilon}{2\hslash}\left(xp+px\right)\right]x\left[1-i \frac{\epsilon}{2\hslash}\left(xp+px\right)\right]\\
+	 =&\ x-i \frac{\epsilon}{2\hslash}\left(xp+px\right)x+i \frac{\epsilon}{2\hslash}x\left(xp+px\right)\\
+	  =&\ x + i \frac{\epsilon}{2\hslash}\left[x,xp+px\right]\\
+	  =&\ x + i \frac{\epsilon}{2\hslash}\left[x,2xp-i\hslash\right]\\
+	  =&\ x + i \frac{\epsilon}{\hslash}\left[x,xp\right]\\
+	  =&\ x + i \frac{\epsilon}{\hslash}x\left[x,p\right]\\
+	  =&\ x + i \frac{\epsilon}{\hslash}xi\hslash\\
+		=&\ \boxed{\left(1-\epsilon\right)x}
+.\end{align*}
+\tcbbreak
+\begin{align*}
+	UpU^{\dag}\approx&\ \left[1-i \frac{\epsilon}{2\hslash}\left(xp+px\right)\right]p\left[1-i \frac{\epsilon}{2\hslash}\left(xp+px\right)\right]\\
+	 =&\ x-i \frac{\epsilon}{2\hslash}\left(xp+px\right)p+i \frac{\epsilon}{2\hslash}p\left(xp+px\right)\\
+	  =&\ x + i \frac{\epsilon}{2\hslash}\left[p,xp+px\right]\\
+	  =&\ x + i \frac{\epsilon}{2\hslash}\left[p,2xp-i\hslash\right]\\
+	  =&\ x + i \frac{\epsilon}{\hslash}\left[p,xp\right]\\
+	  =&\ x + i \frac{\epsilon}{\hslash}p\left[p,x\right]\\
+	  =&\ x - i \frac{\epsilon}{\hslash}pi\hslash\\
+		=&\ \boxed{\left(1+\epsilon\right)p}
+.\end{align*}
+\end{question}
+\begin{question}[title = Part 2]{}{}
+Given the results of the previous part, show how a finite transformation transforms $x, p$.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+Dividing $\lambda$ into $N$ equal sections and letting $N\longrightarrow\infty$ we obtain:\\
+ \begin{align*}
+	x^\prime =&\ \left(1-\frac{\lambda}{N}\right)^{N}x\overset{\left(N\rightarrow\infty\right) }{=}e^{-\lambda}x\\
+	p^\prime =&\ \left(1+\frac{\lambda}{N}\right)^{N}p\overset{\left(N\rightarrow\infty\right) }{=}e^{\lambda}p 
+.\end{align*}
+\end{question}
+\begin{question}[title = Part 3]{}{}
+Show what the transformation $U$ does to $|x\rangle $.
+\tcblower
+\textbf{\emph{\underline{Solution}:}}\\
+Firstly we'll note that $U$ and $x$ do not commute so we'll have to find these two expressions:\\
+\[
+	Ux|x\rangle \quad;\quad xU|x\rangle 
+.\] 
+\begin{gather*}
+	Ux|x_0\rangle=Ux_0|x_0\rangle=x_0U|x_0\rangle\\
+	UxU^{\dag}U|x_0\rangle=e^{-\lambda}xU|x_0\rangle\\
+	\Rightarrow Ux|x_0\rangle=x_0U|x_0\rangle=e^{-\lambda}xU|x_0\rangle\\
+	\Rightarrow xU|x_0\rangle=e^{\lambda}x_0U|x_0\rangle  
+\end{gather*}
+Which means that $U|x_0\rangle $ is an eigenket of $x$ with eigenvalue $e^{\lambda}x_0$:\\
+\[
+	U|x_0\rangle\propto|e^{\lambda}x_0\rangle 
+.\] 
+\tcbbreak
+Now we only need to see if $U$ pulls out a constant:\\
+\begin{gather*}
+\delta\left(x-x^\prime\right)=\langle x^\prime|x\rangle=\langle x^\prime|U^{\dag}U|x\rangle=|A|^2\langle e^{\lambda}x^\prime|e^{\lambda}x\rangle=|A|^2\delta\left(e^{\lambda}\left(x-x^\prime\right) \right) =\frac{|A|^2}{e^{\lambda}}\delta\left(x-x^\prime \right)\\
+\Rightarrow \frac{|A|^2}{e^{\lambda}}=1\\
+\Rightarrow A=e^{\frac{\lambda}{2}}\\
+\Rightarrow \boxed{U|x\rangle=e^{\frac{\lambda}{2}}|e^{\lambda}x\rangle} 
+\end{gather*}
+\end{question}
+\begin{question}[title = Question 2]{}{}
+Show that:\\
+\[
+	R_{z^\prime}\left(\gamma\right)R_{y^\prime}\left(\beta\right)R_{z}\left(\alpha\right)=	R_{z}\left(\alpha\right)R_{y}\left(\beta\right)R_{z}\left(\gamma\right)   
+.\] 
+\end{question}
+\textbf{\emph{\underline{Solution}:}}\\
+Firstly we'll note that $y^\prime$ after the $z$ rotation is:\\
+\[
+	R_{y^\prime}\left(\beta\right)=R_{z}\left(\alpha\right)R_y\left(\beta\right)R_z^{-1}\left(\alpha\right)    
+.\] 
+And that $z^\prime$ after the $y$ rotation is:\\
+\[
+	R_{z^\prime}\left(\gamma\right)=R_{y^\prime}\left(\beta\right)R_z\left(\gamma\right)R_{y^\prime}^{-1}\left(\beta\right)    
+.\] 
+So:\\
+\[
+		R_{z^\prime}\left(\gamma\right)R_{y^\prime}\left(\beta\right)R_{z}\left(\alpha\right)=R_{y^\prime}\left(\beta\right)R_z\left(\gamma\right)\cancel{R_{y^\prime}^{-1}\left(\beta\right)    R_{y^\prime}\left(\beta\right)}R_{z}\left(\alpha\right)
+.\] 
+If we raplace now $R_{y^\prime}\left(\beta\right) $ andremember that rotations around the same axis commute:\\
+\[
+		R_{z^\prime}\left(\gamma\right)R_{y^\prime}\left(\beta\right)R_{z}\left(\alpha\right)=R_{z}\left(\alpha\right)R_y\left(\beta\right)\cancel{R_z^{-1}\left(\alpha\right)    
+R_{z}\left(\alpha\right)}R_z\left(\gamma\right)=R_{z}\left(\alpha\right)R_{y}\left(\beta\right)R_{z}\left(\gamma\right)\checkmark.
+\] 
+\begin{question}[title = Question 3]{}{}
+Given the folloing rotation in $j=\frac{1}{2}$ :\\
+\[
+	\mathcal{D}\left(\hat{\boldsymbol{n}},\theta\right)=\frac{i}{\sqrt{2} }
+	\begin{pmatrix}
+		1 & 1\\
+		1 & -1
+	\end{pmatrix}
+.\] 
+Find $\hat{\boldsymbol{n}}$ and $\theta$.
+\end{question}
+\textbf{\emph{\underline{Solution}:}}\\
+\[
+	\mathcal{D}=\frac{i}{\sqrt{2} } \left(\sigma_{x}+\sigma_z\right)=i\boldsymbol{\sigma}\cdot\left(\frac{\hat{\boldsymbol{x}}+\hat{\boldsymbol{z}}}{\sqrt{2} }\right)  
+.\] 
+\[
+	\Rightarrow 
+	\begin{cases}
+		\cos \frac{\theta}{2}=0\\
+		\sin \frac{\theta}{2}=-1
+	\end{cases}
+	\Rightarrow \boxed{\hat{\boldsymbol{n}}=\frac{\hat{\boldsymbol{x}}+\hat{\boldsymbol{z}}}{\sqrt{2} },\ \theta=3\pi}
+.\] 
+\newpage
+\begin{question}[title = Question 4]{}{}
+Use the identity for $j=1$ :\\
+\[
+	e^{\sfrac{-i\theta J_y}{\hslash}}=1-i\sin \theta \frac{J_y}{\hslash}+\left(\cos \theta -1\right)\left(\frac{J_y}{\hslash}\right)^2  
+.\] 
+To find the elements of $d^{\left(j=1\right) }_{m^\prime m}$.
+\end{question}
+\textbf{\emph{\underline{Solution}:}}\\
+Firstly we'll note that in $j=1$:\\
+\[
+	\frac{L_y}{\hslash}=\frac{1}{i\sqrt{2} }
+\begin{pmatrix}
+	0 & 1 & 0\\
+	-1 & 0 & 1\\
+	0 & -1 & 0
+\end{pmatrix}
+\Rightarrow \left(\frac{L_y}{\hslash}\right)^2=
+\begin{pmatrix}
+	\frac{1}{2} & 0 & -\frac{1}{2}\\
+	0 & 1 & 0\\
+	-\frac{1}{2} & 0 & \frac{1}{2}
+\end{pmatrix}
+.\] 
+Hence:\\
+\[
+	e^{\sfrac{-i\theta J_y}{\hslash}}=
+\begin{pmatrix}
+	1 & 0 & 0\\
+	0 & 1 & 0\\
+	0 & 0 & 1
+\end{pmatrix}
+-i\sin \theta \frac{1}{i\sqrt{2} }
+\begin{pmatrix}
+	0 & 1 & 0\\
+	-1 & 0 & 1\\
+	0 & -1 & 0
+\end{pmatrix}+\left(\cos \theta -1\right)  
+\begin{pmatrix}
+	\frac{1}{2} & 0 & -\frac{1}{2}\\
+	0 & 1 & 0\\
+	-\frac{1}{2} & 0 & \frac{1}{2}
+\end{pmatrix}
+.\] 
+\[
+	\Rightarrow \boxed{d^{\left(j=1\right) }_{m^\prime m}=
+\begin{pmatrix}
+	\frac{1 +\cos \theta}{2} & -\frac{\sin\theta}{\sqrt{2} } & \frac{1-\cos\theta}{2}\\
+	\frac{\sin\theta}{\sqrt{2} }&\cos\theta &-\frac{\sin\theta}{\sqrt{2} } \\
+	\frac{1-\cos\theta}{2}&\frac{\sin\theta}{\sqrt{2} } &\frac{1+\cos \theta}{2} 
+\end{pmatrix}}
+.\] 
+\begin{question}[title = Question 5]{}{}
+Given a state:\\
+\[
+	|\psi\rangle=\frac{1}{\sqrt{2} }
+	\begin{pmatrix}
+		1\\
+		1\\
+		0
+	\end{pmatrix}
+.\] 
+\begin{enumerate}[label=\alph*)]
+	\item Find $|\psi^\prime\rangle $ after a rotation of $\frac{\pi}{2}$ around the $\hat{z}$ axis.
+	\item Find $|\psi^\prime\rangle $ after a rotation of $\frac{\pi}{2}$ around the $\hat{y}$ axis.
+\end{enumerate}
+\end{question}
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{enumerate}[label=\alph*)]
+	\item
+		\[
+			R_z\left(\frac{\pi}{2}\right)=e^{\sfrac{-i \frac{\pi}{2}J_z}{\hslash}} =
+			\begin{pmatrix}
+				e^{-i \frac{\pi}{2}} & 0 & 0\\
+				0 & 1 & 0\\
+				0 & 0 & -e^{-i \frac{\pi}{2}}
+			\end{pmatrix}
+		.\] 
+		\[
+			\Rightarrow |\psi^\prime\rangle=\frac{1}{\sqrt{2} } 
+			\begin{pmatrix}
+				e^{-i \frac{\pi}{2}} & 0 & 0\\
+				0 & 1 & 0\\
+				0 & 0 & -e^{-i \frac{\pi}{2}}
+			\end{pmatrix}
+	\begin{pmatrix}
+		1\\
+		1\\
+		0
+	\end{pmatrix}=\boxed{\frac{1}{\sqrt{2} }
+	\begin{pmatrix}
+		-i\\
+		1\\
+		0
+	\end{pmatrix}
+}		.\] 
+\item 
+		\[
+			R_y\left(\frac{\pi}{2}\right)=e^{\sfrac{-i \frac{\pi}{2}J_y}{\hslash}} =d_{m^\prime m}^{j=1}\left(\theta=\frac{\pi}{2}\right)=
+			\begin{pmatrix}
+				\frac{1}{2}& -\frac{1}{\sqrt{2}} &\frac{1}{2} \\
+				\frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}}\\
+				\frac{1}{2} & \frac{1}{\sqrt{2}} &\frac{1}{2} 
+			\end{pmatrix}
+		.\] 
+		\[
+			\Rightarrow |\psi^\prime\rangle=\frac{1}{\sqrt{2} } 
+			\begin{pmatrix}
+				\frac{1}{2}& -\frac{1}{\sqrt{2}} &\frac{1}{2} \\
+				\frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}}\\
+				\frac{1}{2} & \frac{1}{\sqrt{2}} &\frac{1}{2} 
+			\end{pmatrix}
+	\begin{pmatrix}
+		1\\
+		1\\
+		0
+	\end{pmatrix}=\boxed{\frac{1}{{2}}
+	\begin{pmatrix}
+		\frac{1}{\sqrt{2} }-1\\
+		1\\
+		\frac{1}{\sqrt{2} }+1
+	\end{pmatrix}
+}		.\] 
+\end{enumerate}
+\begin{question}[title = Question 6]{}{}
+The dynamics of a particle with  $j=1$ is given by the hemiltonian:\\
+\[
+	\mathcal{H}=\epsilon
+	\begin{pmatrix}
+		2 & \frac{1-i}{2} & 0\\
+		\frac{1+i}{2} & 2 &\frac{1-i}{2}\\
+		0 & \frac{1+i}{2} & 2
+	\end{pmatrix}
+.\] 
+\begin{enumerate}[label=\alph*)]
+	\item Write $\mathcal{H}$ as a sum of the elements of $\boldsymbol{J}$ and $J^2$ i.e.:\\
+		\[
+			\mathcal{H}=aJ^2+b \boldsymbol{J}\cdot \hat{\boldsymbol{a}}
+		.\] 
+	\item Is $\mathcal{H}$ symmetrical under an arbitrary rotation?
+	\item With wich angle $\theta$ and around wich axis $\hat{\boldsymbol{n}}$, $\hat{\boldsymbol{a}}$ must be turned such that it will point in $\hat{\boldsymbol{z}}$?
+	\item What are the euler angles $\alpha,\beta,\gamma$ that corrospond to the rotation from the previous section?
+	\item Find the rotation matrix $\mathcal{D}\left(\hat{\boldsymbol{n}},\theta\right) $.
+	\item Show that the rotation matrix diagonalize $\mathcal{H}$.
+\end{enumerate}
+\end{question}
+\textbf{\emph{\underline{Solution}:}}\\
+\begin{enumerate}[label=\alph*)]
+	\item \[
+		\mathcal{H}=\frac{\epsilon}{\hslash^2} J^2 + \frac{\epsilon}{\hslash} \boldsymbol{J} \cdot \left(\frac{\hat{\boldsymbol{x}}+\hat{\boldsymbol{y}}}{\sqrt{2} }\right) 
+	.\] 
+	\[
+		\Rightarrow E_{lm}=\epsilon \left(j\left(j+1\right) + m\right)  =\left(2+m\right)\epsilon 
+	.\] 
+\item No, the system is only symmetrical to rotations around the $\hat{\boldsymbol{a}}=\frac{\hat{\boldsymbol{x}}+\hat{\boldsymbol{y}}}{\sqrt{2} }$ axis.
+\item Around $\hat{\boldsymbol{n}}=\frac{\hat{\boldsymbol{x}}-\hat{\boldsymbol{y}}}{\sqrt{2}}$ with $\theta= \frac{\pi}{2}$.
+\item \[
+	\gamma= \frac{\pi}{4}\qquad\beta= \frac{\pi}{2}\qquad\alpha=0
+.\] 
+\item With $d_{m^\prime m}^{\left(j=1\right) }$ wich we already calculated:\\
+	\begin{align*}
+	\mathcal{D} =&\ e^{\sfrac{-i \frac{\pi}{2}J_y}{\hslash}}e^{\sfrac{-i \frac{\pi}{4}J_z}{\hslash}}\\
+	 =&\ 
+			\begin{pmatrix}
+				\frac{1}{2}& -\frac{1}{\sqrt{2}} &\frac{1}{2} \\
+				\frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}}\\
+				\frac{1}{2} & \frac{1}{\sqrt{2}} &\frac{1}{2} 
+			\end{pmatrix}
+			\begin{pmatrix}
+				e^{-i \frac{\pi}{4}} & 0 & 0\\
+				0 & 1 & 0\\
+				0 & 0 & e^{i \frac{\pi}{4}}
+			\end{pmatrix}\\
+			 =&\ 
+			\begin{pmatrix}
+			e^{i \frac{\pi}{4}} & \sqrt{2}  & e\\
+			 &  & \\
+			 &  & 
+			\end{pmatrix} 
+	.\end{align*}
+\end{enumerate}
+
+
+\end{document}
+

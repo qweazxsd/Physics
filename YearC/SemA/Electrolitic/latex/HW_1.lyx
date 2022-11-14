@@ -1,0 +1,490 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass heb-article
+\use_default_options true
+\maintain_unincluded_children false
+\language hebrew
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "David CLM"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0cm
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+תרגיל בית
+\family roman
+\series medium
+\shape up
+\size largest
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+| אלקטרומגנטיות אנליטית
+\end_layout
+
+\begin_layout Author
+אלון נר גאון
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+שאלה 
+\numeric on
+1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+A\times\left(B\times C\right) & =\varepsilon_{ijk}A_{j}\left(B\times C\right)_{k}\\
+ & =\varepsilon_{ijk}A_{j}\left(\varepsilon_{klm}B_{l}C_{m}\right)\\
+ & =\varepsilon_{ijk}\varepsilon_{lmk}A_{j}B_{l}C_{m}\\
+ & =\left(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}\right)A_{j}B_{l}C_{m}\\
+ & =A_{m}B_{l}C_{m}-A_{l}B_{l}C_{m}\\
+ & =\boxed{\left(A\cdot C\right)B-C\left(A\cdot B\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\left(A\times B\right)\cdot C & =\varepsilon_{ijk}A_{j}B_{k}C_{i}\\
+\varepsilon\ is\ cyclic\Rightarrow & =\varepsilon_{kij}A_{j}B_{k}C_{i}\\
+ & =\boxed{\left(B\times C\right)\cdot A}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\nabla\cdot\left(A\times B\right) & =\partial_{i}\varepsilon_{ijk}A_{j}B_{k}\\
+ & =\varepsilon_{ijk}\left(\partial_{i}A_{j}B_{k}+A_{j}\partial_{i}B_{k}\right)
+\end{align*}
+
+\end_inset
+
+כאן הסדר חשוב כי חשוב לזכור את מי אנחנו גוזרים, באיבר השני נשים לב כי 
+\begin_inset Formula $jik$
+\end_inset
+
+ פרמוטציה אנטי-ציקלית של האפסילון של לוי צ'ויטה ולכן הוא יקבל סימן מינוס:
+\begin_inset Formula 
+\[
+=\boxed{\left(\nabla\times A\right)\cdot B-A\left(\nabla\times B\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\nabla\cdot\left(\nabla\times A\right) & =\partial_{i}\varepsilon_{ijk}\partial_{j}A_{k}\\
+ & =\varepsilon_{ijk}\partial_{i}\partial_{j}A_{k}
+\end{align*}
+
+\end_inset
+
+כאן מדובר בסכום של איבר אנטי סימטרי 
+\begin_inset Formula $\left(\varepsilon_{ijk}\right)$
+\end_inset
+
+ באיבר סימטרי 
+\begin_inset Formula $\left(\partial_{i}\partial_{j}\right)$
+\end_inset
+
+ ולכן התוצאה מייד
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\numeric off
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\nabla\cdot\left(\Phi A\right) & =\partial_{i}\left(\Phi A\right)_{i}\\
+ & =\partial_{i}\Phi_{i}A_{i}+\Phi_{i}\partial_{i}A_{i}\\
+ & =\boxed{\nabla\cdot\Phi A+\Phi\nabla\cdot A}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\nabla\times\left(\Phi A\right) & =\varepsilon_{ijk}\partial_{j}\left(\Phi A\right)_{k}\\
+ & =\boxed{\nabla\times\Phi A+\Phi\nabla\times A}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+שאלה 
+\numeric on
+2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+ע"י ההגדרה של פונק' הדלתא:
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}\delta\left(kx\right)dx & =\int_{-\infty}^{\infty}\delta\left(x^{\prime}\right)\frac{dx^{\prime}}{\left|k\right|}=\frac{1}{\left|k\right|}\\
+ & \Downarrow\\
+\delta\left(kx\right) & =\delta\frac{\left(x\right)}{\left|k\right|}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+נעשה אינטגרציה בחלקים:
+\begin_inset Formula 
+\begin{align*}
+\int x\frac{d}{dx}\delta\left(x\right)dx=x\delta\left(x\right)-\int\delta\left(x\right)dx & =\cancel{x\delta\left(x\right)|_{-\infty}^{\infty}}-\int\delta\left(x\right)dx\\
+\int x\frac{d}{dx}\delta\left(x\right)dx & =-\int\delta\left(x\right)dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+ע"י אינטגרציה:
+\begin_inset Formula 
+\[
+\int_{-\varepsilon}^{\varepsilon}\Theta^{\prime}\left(x\right)dx=\Theta\left(\varepsilon\right)-\Theta\left(-\varepsilon\right)=1-0=1
+\]
+
+\end_inset
+
+וזה נכון לכל ערך של 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ גדול או קטן ככל שיהיה, ולכן זוהי בדיוק אחת ההגדרות לפונק' הדלא.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+שאלה 
+\numeric on
+3
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\rho\left(r,\theta,z\right) & =\delta\left(r-a\right)\delta\left(z\right)\lambda
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+Q=\int\rho d\mathbf{r} & =\int\delta\left(r-a\right)\delta\left(z\right)\frac{q}{a}\left(1+\cos\left(2\theta\right)\right)rdrd\theta dz\\
+ & =\int\cancel{\delta\left(r-a\right)}\cancel{\delta\left(z\right)}\frac{q}{\cancel{a}}\left(1+\cos\left(2\theta\right)\right)\cancel{r}\cancel{dr}d\theta\cancel{dz}\\
+ & =q\int\left(1+\cos\left(2\theta\right)\right)d\theta\\
+ & =\boxed{2\pi q}
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+עבור כל 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ יש נקודה מקבילה 
+\begin_inset Formula $\pi$
+\end_inset
+
+ ממנה )כי 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ הולכת עד 
+\begin_inset Formula $\pi$
+\end_inset
+
+ בק.
+ כדוריות(
+\begin_inset Formula 
+\[
+\rho\left(r,\theta,\varphi\right)=\delta\left(r-a\right)\delta\left(\varphi-\omega t\right)\delta\left(\varphi-\omega t+\pi\right)\lambda
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+Q=\int\rho d\mathbf{r} & =\int\delta\left(r-a\right)\delta\left(\varphi-\omega t\right)\frac{q}{a}\cos\theta r^{2}\sin\theta drd\theta d\varphi\\
+ & =\int\cancel{\delta\left(r-a\right)}\delta\left(\varphi-\omega t\right)\frac{q}{\cancel{a}}\cos\theta r^{\cancel{2}}\sin\theta\cancel{dr}d\theta d\varphi\\
+ & =qa\int\cos\theta\sin\theta d\theta\\
+ & =\boxed{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+ע"י "פונקציית רמה" אפשר להגדיר בתחום מסויים )כמו
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+if
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בקוד(:
+\begin_inset Formula 
+\begin{align*}
+\rho\left(x,y,z\right) & =\lambda\left(\Theta\left(x\right)-\Theta\left(x-d\right)\right)\delta\left(y\right)\delta\left(z\right)\\
+\rho\left(r,\theta,z\right) & =\lambda\left(\Theta\left(z\right)-\Theta\left(z-d\right)\right)\delta\left(r\right)\delta\left(\theta\right)\\
+\rho\left(r,\theta,\varphi\right) & =\lambda\left(\Theta\left(r\right)-\Theta\left(r-d\right)\right)\delta\left(\theta\right)\delta\left(\varphi\right)\\
+ & \Downarrow\\
+Q & =\lambda d
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+\rho\left(r,\theta,z\right) & =\rho_{0}\left(\Theta\left(z\right)-\Theta\left(z-d\cos\alpha\right)\right)\left(\Theta\left(r\right)-\Theta\left(r-z\tan\alpha\right)\right)\\
+ & \Downarrow\\
+ & =\frac{\rho_{0}\pi}{3}d^{3}\sin^{2}\alpha\cos\alpha
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
