@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1668372021 "EX3.tex" "EX3.pdf" "EX3" 1668372022
+["pdflatex"] 1668512535 "EX3.tex" "EX3.pdf" "EX3" 1668512536
   "/home/alon/Physics/Latex/letterfonts.tex" 1666544468 8702 ef32ca12e97530ef5734ca4adcb1f6b1 ""
   "/home/alon/Physics/Latex/macros.tex" 1666544468 3389 93000260d2aea292d29c76d4ace77a29 ""
   "/home/alon/Physics/Latex/preamble.tex" 1668269968 20479 b16598df6be15ba36b6588dfe3af7a6e ""
@@ -257,8 +257,8 @@
   "/opt/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1664903155 4596487 5a13cb0bfe5a35a895c36bef1016ec3b ""
   "/opt/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1664903155 3059200 a88032c1f4bc0a562e4dada1064ce55e ""
   "/opt/texlive/2022/texmf.cnf" 1664903155 585 9e8504408f25e5ac7fa614e58817b8d1 ""
-  "EX3.aux" 1668372022 676 fb76b92c6e499aa8f6e3f1464bb239df "pdflatex"
-  "EX3.tex" 1668372021 11284 9bf32757322726895f6e3b6282c01837 ""
+  "EX3.aux" 1668512536 676 57b2a1daef250bbea58b826700684477 "pdflatex"
+  "EX3.tex" 1668512535 13051 ccf04df767b5247bafc057752bd10df9 ""
   (generated)
   "EX3.aux"
   "EX3.log"

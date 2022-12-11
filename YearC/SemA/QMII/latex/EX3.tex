@@ -1,3 +1,4 @@
+
 \documentclass[notitlepage]{report}
 
 \input{~/Physics/Latex/preamble}
@@ -278,33 +279,82 @@ The dynamics of a particle with  $j=1$ is given by the hemiltonian:\\
 		\mathcal{H}=\frac{\epsilon}{\hslash^2} J^2 + \frac{\epsilon}{\hslash} \boldsymbol{J} \cdot \left(\frac{\hat{\boldsymbol{x}}+\hat{\boldsymbol{y}}}{\sqrt{2} }\right) 
 	.\] 
 	\[
-		\Rightarrow E_{lm}=\epsilon \left(j\left(j+1\right) + m\right)  =\left(2+m\right)\epsilon 
+		\Rightarrow E_{lm}=\epsilon \left(j\left(j+1\right) + m\right)  =\left(2+m\right)\epsilon =
+		\begin{cases}
+			3\epsilon & m=1\\
+			2\epsilon & m=0\\
+			\epsilon & m=-1
+		\end{cases}
 	.\] 
 \item No, the system is only symmetrical to rotations around the $\hat{\boldsymbol{a}}=\frac{\hat{\boldsymbol{x}}+\hat{\boldsymbol{y}}}{\sqrt{2} }$ axis.
 \item Around $\hat{\boldsymbol{n}}=\frac{\hat{\boldsymbol{x}}-\hat{\boldsymbol{y}}}{\sqrt{2}}$ with $\theta= \frac{\pi}{2}$.
 \item \[
-	\gamma= \frac{\pi}{4}\qquad\beta= \frac{\pi}{2}\qquad\alpha=0
+	\gamma= -\frac{\pi}{4}\qquad\beta= -\frac{\pi}{2}\qquad\alpha=0
 .\] 
 \item With $d_{m^\prime m}^{\left(j=1\right) }$ wich we already calculated:\\
 	\begin{align*}
-	\mathcal{D} =&\ e^{\sfrac{-i \frac{\pi}{2}J_y}{\hslash}}e^{\sfrac{-i \frac{\pi}{4}J_z}{\hslash}}\\
+	\mathcal{D} =&\ e^{\sfrac{i \frac{\pi}{2}J_y}{\hslash}}e^{\sfrac{i \frac{\pi}{4}J_z}{\hslash}}\\
 	 =&\ 
 			\begin{pmatrix}
-				\frac{1}{2}& -\frac{1}{\sqrt{2}} &\frac{1}{2} \\
-				\frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}}\\
-				\frac{1}{2} & \frac{1}{\sqrt{2}} &\frac{1}{2} 
+				\frac{1}{2}& \frac{1}{\sqrt{2}} &\frac{1}{2} \\
+				-\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}}\\
+				\frac{1}{2} & -\frac{1}{\sqrt{2}} &\frac{1}{2} 
 			\end{pmatrix}
 			\begin{pmatrix}
-				e^{-i \frac{\pi}{4}} & 0 & 0\\
+				e^{i \frac{\pi}{4}} & 0 & 0\\
 				0 & 1 & 0\\
-				0 & 0 & e^{i \frac{\pi}{4}}
+				0 & 0 & e^{-i \frac{\pi}{4}}
 			\end{pmatrix}\\
-			 =&\ 
+			 =&\ \boxed{\frac{1}{2}
 			\begin{pmatrix}
-			e^{i \frac{\pi}{4}} & \sqrt{2}  & e\\
-			 &  & \\
-			 &  & 
+			e^{i \frac{\pi}{4}} & \sqrt{2}  & e^{-i \frac{\pi}{4}}\\
+			 -\sqrt{2}e^{i \frac{\pi}{4}}& 0 & \sqrt{2}e^{-i \frac{\pi}{4}}\\
+			 e^{i \frac{\pi}{4}}& -\sqrt{2} & e^{-i \frac{\pi}{4}} 
+			\end{pmatrix}} 
+	.\end{align*}
+	\newpage
+\item 
+	\begin{align*}
+		\mathcal{D}\mathcal{H}\mathcal{D}^{\dag} =&\ 2\epsilon\mathbb{I} + \frac{\epsilon}{4}
+			\begin{pmatrix}
+			e^{i \frac{\pi}{4}} & \sqrt{2}  & e^{-i \frac{\pi}{4}}\\
+			 -\sqrt{2}e^{i \frac{\pi}{4}}& 0 & \sqrt{2}e^{-i \frac{\pi}{4}}\\
+			 e^{i \frac{\pi}{4}}& -\sqrt{2} & e^{-i \frac{\pi}{4}} 
 			\end{pmatrix} 
+			\begin{pmatrix}
+			0 & \frac{1}{\sqrt{2} }e^{-i \frac{\pi}{4}} & 0\\
+			 \frac{1}{\sqrt{2} }e^{i \frac{\pi}{4}}& 0 &\frac{1}{\sqrt{2} }e^{-i \frac{\pi}{4}} \\
+			0 & \frac{1}{\sqrt{2} }e^{i \frac{\pi}{4}} & 0
+			\end{pmatrix}
+			\begin{pmatrix}
+			e^{-i \frac{\pi}{4}} & -\sqrt{2}e^{-i \frac{\pi}{4}}  & e^{-i \frac{\pi}{4}}\\
+			 \sqrt{2}& 0 & -\sqrt{2}\\
+			 e^{i \frac{\pi}{4}}& \sqrt{2}e^{i \frac{\pi}{4}} & e^{i \frac{\pi}{4}} 
+			\end{pmatrix}\\ 
+			 =&\ 2\epsilon\mathbb{I} + \frac{\epsilon}{4}
+			\begin{pmatrix}
+			e^{i \frac{\pi}{4}} & \sqrt{2}  & e^{-i \frac{\pi}{4}}\\
+			 -\sqrt{2}e^{i \frac{\pi}{4}}& 0 & \sqrt{2}e^{-i \frac{\pi}{4}}\\
+			 e^{i \frac{\pi}{4}}& -\sqrt{2} & e^{-i \frac{\pi}{4}} 
+			\end{pmatrix}
+			\begin{pmatrix}
+			e^{-i \frac{\pi}{4}} & 0 & -e^{-i \frac{\pi}{4}}\\
+			 \sqrt{2}& 0 & \sqrt{2}\\
+			 e^{i \frac{\pi}{4}}& 0 & -e^{i \frac{\pi}{4}} 
+			\end{pmatrix} \\
+			 =&\ 2\epsilon\mathbb{I} + \frac{\epsilon}{4}
+			 \begin{pmatrix}
+			 4 &  & \\
+			  & 0 & \\
+			  &  & -4
+			 \end{pmatrix}\\
+			 =&\ \boxed{
+				 \begin{pmatrix}
+				 3\epsilon &  & \\
+				  & 2\epsilon & \\
+				  &  & \epsilon
+				 \end{pmatrix}
+			 }\checkmark
 	.\end{align*}
 \end{enumerate}
 
