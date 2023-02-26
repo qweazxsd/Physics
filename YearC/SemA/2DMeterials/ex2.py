@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
-from scipy.constants import c, pi, hbar, k
+from scipy.constants import c, pi, hbar, k, elementary_charge
 from scipy.integrate import quad_vec
 plt.rcParams['font.size'] = 20
 
@@ -89,22 +89,24 @@ def G(x: np.ndarray, ef: float, t: float) -> np.ndarray:
     return np.divide(np.sinh(x/(k*t)), np.cosh(ef/(k*t)) + np.cosh(x/(k*t)))
 
 
-def integrand(x, omega, ef, t):
-    return np.divide(G(x, ef, t) - G(omega/2, ef, t), omega**2 - 4*x**2)
+#def integrand(x, omega, ef, t):
+#    return np.divide(G(x, ef, t) - G(omega/2, ef, t), omega**2 - 4*x**2)
 
+def integrand(x):
+    return np.divide(G(x, Ef, T) - G(omega/2, Ef, T), hbaromega**2 - 4*x**2)
 
 def local_intra(omega: np.ndarray, gamma: float, ef: float, t: float) -> np.ndarray:
     return (1/pi) * np.divide(4, gamma - 1j*omega) * (ef + 2*k*t*np.log(1 + np.exp(-ef/(k*t))))
 
 
 def local_inter(omega: np.ndarray, ef: float, t: float) -> np.ndarray:
-    I, err = quad_vec(integrand, 0, np.Inf, args=(omega, ef, t))
+    I, err = quad_vec(integrand, 0, ef)
     return G(omega/2, ef, t) + (4j*omega/pi) * I
 
 
 hbaromega = np.linspace(0, 1, 500)
 hbargamma = 3.7
-Ef = 0.3
+Ef = 0.3 * elementary_charge
 T = 300
 x = np.linspace(-1, 1, 500)
 fig, ax = plt.subplots()
@@ -114,7 +116,6 @@ fig, ax = plt.subplots()
 ax.set(xlabel=r'$\omega\ \left[eV\right]$', ylabel=r'$\frac{\sigma}{\sigma_0}$')
 #ax.vlines(omega_p, -100, 20, colors='r')
 
-ax.plot(x, integrand(x, hbaromega, Ef, T))
 ax.plot(hbaromega, kubo_intra(hbaromega, hbargamma, Ef) + kubo_inter(hbaromega, Ef), lw=3, label=r'$Kubo_r$')
 ax.plot(hbaromega, np.imag(kubo_intra(hbaromega, hbargamma, Ef) + kubo_inter(hbaromega, Ef)), lw=3, label=r'$Kubo_i$')
 ax.plot(hbaromega, local_intra(hbaromega, hbargamma, Ef, T) + local_inter(hbaromega, Ef, T), lw=3, label=r'$local_r$')
