@@ -1,53 +1,110 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import c, epsilon_0, hbar, mu_0, pi
+from sys import exit
+
+
+def mult(a: np.ndarray, b:np.ndarray) -> np.ndarray:
+    """
+    This function takes two 2X2Xn matrices and performs regular matrix 
+    multiplication along the first two axes. 
+    every element in the 2X2 matrix is a vector. 
+    """
+    if a.shape != b.shape:
+        print("Shapes of arrays must match")
+        exit(0)
+    if a.shape[0] != 2 or a.shape[1] != 2 or b.shape[0] != 2 or b.shape[1] != 2:
+        print("only 2X2 matrices")
+        exit(0)
+
+    c = np.empty(a.shape)
+
+    c[0,0,:] = a[0,0,:]*b[0,0,:] + a[0,1,:]*b[1,0,:]
+    c[0,1,:] = a[0,0,:]*b[0,1,:] + a[0,1,:]*b[1,1,:]
+    c[1,0,:] = a[1,0,:]*b[0,0,:] + a[1,1,:]*b[1,0,:]
+    c[1,1,:] = a[1,0,:]*b[0,1,:] + a[1,1,:]*b[1,1,:]
+
+    return c
+
+
+def epsilon_in(w):
+    return 1 
+
+
+def epsilon_out(w):
+    return 1
+
+
+def foo(w):
+    print(f"Hi {w}")
+    return 1
+
+
+def scalar_epsilon0(w):
+    return 1.25
+
+
+def scalar_epsilon1(w):
+    return 2.25
 
 
 class Layer:
-    def __init__(self, e: float, d:float, m:str) -> None:
+    def __init__(self, e, d, m = None) -> None:
         self.epsilon = e
         self.d = d
-        self.mat = m
+        if m is not None:
+            self.mat = m
 
 
-# The first Layer is always air
+########################################################################
+###########################  USER VERIABLES  ###########################
+########################################################################
+
 layers = [
-            Layer(e=1.5, d=500),
-            Layer(e=1.5, d=500),
-            Layer(e=1.5, d=500)
+            Layer(e=scalar_epsilon0, d=500),
+            Layer(e=scalar_epsilon1, d=50)
         ]
+
+graphene_transitions = []
+
+
+len_array = 200
+theta_in = pi/6  # theta incident
+
+hw = np.linspace(0, 10, len_array)  # omega in units of hbar*omega = eV
+
+#######################################################################
+#######################################################################
+#######################################################################
+
+
 nlayers = len(layers)
-
-graphene_transitions = [0, 1]
-
-
-n_theta = 50
-theta_in = np.linspace(0, pi/2, n_theta)  # theta incident
-
-hw = np.linspace(0, 10, 200)  # omega in units of hbar*omega = eV
 w = hw/hbar  # [1\s]
 k0 = w/c  # [1\m]
 
-eps_in = 1
+eps_in = epsilon_in(w)
 kx = k0 * np.sqrt(eps_in) * np.sin(theta_in)
 
-eps_out = 1
+eps_out = epsilon_out(w) 
 
-TMM = np.eye(2)
-for i in range(nlayers+1):  # for evert TRANSITION
-    M = np.empty((2,2))
+TMM = np.zeros((2,2,len_array))  # initializing the TMM as unit matrix
+TMM[0,0,:] = np.ones(len_array)
+TMM[1,1,:] = np.ones(len_array)
+
+for i in range(nlayers+1):  # for every TRANSITION
+    M = np.empty((2,2,len_array))
 
 
     if i == 0:  # first transition
         eps1 = eps_in
     else:
-        eps1 = layers[i].epsilon
+        eps1 = layers[i-1].epsilon(w)
 
 
     if i == nlayers+1:  # last transition
         eps2 = eps_out
     else:
-        eps2 = layers[i+1].epsilon
+        eps2 = layers[i].epsilon(w)
 
 
     k1z = np.sqrt(kx**2 - eps1*k0**2)
@@ -62,16 +119,51 @@ for i in range(nlayers+1):  # for evert TRANSITION
         zeta = sigma_graphene * k2z / (epsilon_0*eps2*w)
 
 
-    M[0, 0] = 1/2 * (1+eta+zeta)
-    M[0, 1] = 1/2 * (1-eta-zeta)
-    M[1, 0] = 1/2 * (1-eta+zeta)
-    M[1, 1] = 1/2 * (1+eta-zeta)
+    M[0,0,:] = 1/2 * (1+eta+zeta)
+    M[0,1,:] = 1/2 * (1-eta-zeta)
+    M[1,0,:] = 1/2 * (1-eta+zeta)
+    M[1,1,:] = 1/2 * (1+eta-zeta)
 
 
-    P = np.eye(2)
-    if i != nlayers+1:
-        P[0, 0] = np.exp(-1j*k1z*layers[i].d)
-        P[1, 1] = np.exp(1j*k1z*layers[i].d)
+    P = np.zeros((2,2,len_array))  # initializing the propogation matrix as unit matrix
+    P[0,0,:] = np.exp(-1j*k1z*layers[i].d)
+    P[1,1,:] = np.exp(1j*k1z*layers[i].d)
+    if i == nlayers+1:
+        P[0,0,:] = np.ones(len_array)
+        P[1,1,:] = np.ones(len_array)
 
 
-    MP = 
+    MP = mult(M,P) 
+
+    TMM = mult(TMM,MP)
+
+
+# Reflectance 
+r = TMM[1,0,:]/TMM[0,0,:]
+R = np.abs(r)**2
+
+# Transistance
+t = 1/TMM[0,0,:]
+
+kz_in = np.sqrt(kx**2 - eps_in*k0**2)
+kz_out = np.sqrt(kx**2 - eps_out*k0**2)
+eta_p = (eps_in/eps_out) * (kz_out/kz_in)
+
+T = eta_p * np.abs(t)**2
+
+
+#Absorbance
+A = 1 - R - T
+
+
+
+# Plotting
+fig, ax = plt.subplots()
+
+ax.plot(w, R, label="R", c="r")
+ax.plot(w, T, label="T", c="b")
+ax.plot(w, A, label="A", c="gray")
+
+ax.legend(loc="best")
+
+plt.show()
