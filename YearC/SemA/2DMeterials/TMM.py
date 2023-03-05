@@ -4,6 +4,18 @@ from scipy.constants import c, epsilon_0, hbar, mu_0, pi
 from sys import exit
 
 
+
+########################################################################
+#############################  CONSTANTS  ##############################
+########################################################################
+
+EV_TO_HZ = 241799050402293
+
+########################################################################
+########################################################################
+########################################################################
+
+
 def mult(a: np.ndarray, b:np.ndarray) -> np.ndarray:
     """
     This function takes two 2X2Xn matrices and performs regular matrix 
@@ -79,7 +91,7 @@ hw = np.linspace(0, 10, len_array)  # omega in units of hbar*omega = eV
 
 
 nlayers = len(layers)
-w = hw/hbar  # [1\s]
+w = hw * EV_TO_HZ  
 k0 = w/c  # [1\m]
 
 eps_in = epsilon_in(w)
