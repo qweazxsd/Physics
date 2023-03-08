@@ -1,0 +1,18 @@
+Aligned a new spot with a smaller angle of incidence (100mm lens with ~5mm offset between incident and reflected beam) ~2.8degrees
+Power = 7.5*2mW
+accidently after reaching 165K I cooled down to 5K and back to 170K :( measurement seems to be consistent at the high temp though even after the cooldown warmup
+
+
+cooldown to 5K
+
+5K fluences 
+
+temperatures 19p7mW only short times
+
+insert quarter waveplate and measured fluences
+
+started a temperature run but the laser shut down in the middle of the measurement     "polarizations temp"
+
+strted a new run   :    "polarization temp run2"
+
+
