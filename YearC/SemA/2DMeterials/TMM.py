@@ -29,7 +29,7 @@ def mult(a: np.ndarray, b:np.ndarray) -> np.ndarray:
         print("only 2X2 matrices")
         exit(0)
 
-    c = np.empty(a.shape)
+    c = np.empty(a.shape, dtype=np.complex64)
 
     c[0,0,:] = a[0,0,:]*b[0,0,:] + a[0,1,:]*b[1,0,:]
     c[0,1,:] = a[0,0,:]*b[0,1,:] + a[0,1,:]*b[1,1,:]
@@ -39,43 +39,30 @@ def mult(a: np.ndarray, b:np.ndarray) -> np.ndarray:
     return c
 
 
-def epsilon_in(w):
-    return 1 
-
-
-def epsilon_out(w):
-    return 1
-
-
-def foo(w):
-    print(f"Hi {w}")
-    return 1
-
-
-def scalar_epsilon0(w):
-    return 1.25
-
-
-def scalar_epsilon1(w):
-    return 2.25
-
-
 class Layer:
-    def __init__(self, e, d, m = None) -> None:
-        self.epsilon = e
-        self.d = d
-        if m is not None:
-            self.mat = m
+    def __init__(self, mat, d=None) -> None:
+        """
+        d is in nanometers
+        """
+
+        if d is not None:
+            self.d = d * 1e-09
+
+        if isinstance(mat, int) or isinstance(mat, float) or isinstance(mat, complex):
+            self.epsilon = mat
+
 
 
 ########################################################################
 ###########################  USER VERIABLES  ###########################
 ########################################################################
 
+layer_in = Layer(mat=1)
 layers = [
-            Layer(e=scalar_epsilon0, d=500),
-            Layer(e=scalar_epsilon1, d=50)
+            Layer(d=500, mat=1.25),
+            Layer(d=50, mat=2.3)
         ]
+layer_out = Layer(mat=1)
 
 graphene_transitions = []
 
@@ -83,7 +70,7 @@ graphene_transitions = []
 len_array = 200
 theta_in = pi/6  # theta incident
 
-hw = np.linspace(0, 10, len_array)  # omega in units of hbar*omega = eV
+hw = np.linspace(0, 10, len_array, dtype=np.complex64)  # omega in units of hbar*omega = eV
 
 #######################################################################
 #######################################################################
@@ -94,30 +81,29 @@ nlayers = len(layers)
 w = hw * EV_TO_HZ  
 k0 = w/c  # [1\m]
 
-eps_in = epsilon_in(w)
+eps_in = layer_in.epsilon
 kx = k0 * np.sqrt(eps_in) * np.sin(theta_in)
 
-eps_out = epsilon_out(w) 
+eps_out = layer_out.epsilon
 
-TMM = np.zeros((2,2,len_array))  # initializing the TMM as unit matrix
+TMM = np.zeros((2,2,len_array), dtype=np.complex64)  # initializing the TMM as unit matrix
 TMM[0,0,:] = np.ones(len_array)
 TMM[1,1,:] = np.ones(len_array)
 
 for i in range(nlayers+1):  # for every TRANSITION
-    M = np.empty((2,2,len_array))
+    M = np.empty((2,2,len_array), dtype=np.complex64)
 
 
     if i == 0:  # first transition
         eps1 = eps_in
     else:
-        eps1 = layers[i-1].epsilon(w)
+        eps1 = layers[i-1].epsilon
 
 
-    if i == nlayers+1:  # last transition
+    if i == nlayers:  # last transition
         eps2 = eps_out
     else:
-        eps2 = layers[i].epsilon(w)
-
+        eps2 = layers[i].epsilon
 
     k1z = np.sqrt(kx**2 - eps1*k0**2)
     k2z = np.sqrt(kx**2 - eps2*k0**2)
@@ -136,16 +122,14 @@ for i in range(nlayers+1):  # for every TRANSITION
     M[1,0,:] = 1/2 * (1-eta+zeta)
     M[1,1,:] = 1/2 * (1+eta-zeta)
 
+    P = np.zeros((2,2,len_array), dtype=np.complex64)  # initializing the propogation matrix as unit matrix
+    P[0, 0, :] = np.ones(len_array)
+    P[1, 1, :] = np.ones(len_array)
+    if i != nlayers:
+        P[0, 0, :] = np.exp(-1j * k1z * layers[i].d)
+        P[1, 1, :] = np.exp(1j * k1z * layers[i].d)
 
-    P = np.zeros((2,2,len_array))  # initializing the propogation matrix as unit matrix
-    P[0,0,:] = np.exp(-1j*k1z*layers[i].d)
-    P[1,1,:] = np.exp(1j*k1z*layers[i].d)
-    if i == nlayers+1:
-        P[0,0,:] = np.ones(len_array)
-        P[1,1,:] = np.ones(len_array)
-
-
-    MP = mult(M,P) 
+    MP = mult(M,P)
 
     TMM = mult(TMM,MP)
 

@@ -4,7 +4,7 @@ from matplotlib.ticker import AutoMinorLocator
 from scipy.constants import c, pi, hbar, k, elementary_charge
 from scipy.integrate import quad_vec
 plt.rcParams['font.size'] = 20
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = False
 
 kB = k
 sigma_0 = elementary_charge**2 / (4*hbar)
@@ -43,10 +43,10 @@ def local(omega: np.ndarray, gamma: float, ef: float, t: float) -> np.ndarray:
 
 
 
-hbaromega = np.linspace(0, 1, 200)
-hbargamma = 2
+hbaromega = np.linspace(0, 1, 2000)
+hbargamma = 3.7
 Ef = 0.3 
-T = 0.00000001
+T = 300
 
 #Ef = 0.4 * elementary_charge
 #hbargamma = 0.012 * elementary_charge / hbar
@@ -55,7 +55,7 @@ T = 0.00000001
 
 fig, ax = plt.subplots()
 
-ax.set(xlabel=r'$\omega\ \left[eV\right]$', ylabel=r'$\frac{\sigma}{\sigma_0}$')
+ax.set(xlabel=r'$\omega\ \left[eV\right]$', ylabel=r'$\frac{\sigma}{\sigma_0}$', ylim=(-2,2))
        #, xlim=(0, 3), ylim=(-2, 3))
 #ax.vlines(omega_p, -100, 20, colors='r')
 
