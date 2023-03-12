@@ -11,7 +11,7 @@ sigma_0 = elementary_charge**2 / (4*hbar)
 def FermiDirac(E, T):
     # np.logaddexp reduces chance of underflow error.
     # Add a tiny offset to temperature to avoid division by zero.
-    FD = np.exp( -np.logaddexp(E/(kB*(T+0.000000000001)),0) )
+    FD = np.exp( -np.logaddexp(E/(kB*(T+0.000001)),0) )
 
     return FD
 
@@ -59,8 +59,8 @@ ax.set(xlabel=r'$\omega\ \left[eV\right]$', ylabel=r'$\frac{\sigma}{\sigma_0}$',
        #, xlim=(0, 3), ylim=(-2, 3))
 #ax.vlines(omega_p, -100, 20, colors='r')
 
-ax.plot(hbaromega, kubo(hbaromega, hbargamma, Ef)/sigma_0, lw=3, label=r'$Kubo_r$')
-ax.plot(hbaromega, np.imag(kubo(hbaromega, hbargamma, Ef))/sigma_0, lw=3, label=r'$Kubo_i$')
+# ax.plot(hbaromega, kubo(hbaromega, hbargamma, Ef)/sigma_0, lw=3, label=r'$Kubo_r$')
+# ax.plot(hbaromega, np.imag(kubo(hbaromega, hbargamma, Ef))/sigma_0, lw=3, label=r'$Kubo_i$')
 ax.plot(hbaromega, local(hbaromega, hbargamma, Ef, T)/sigma_0, lw=3, label=r'$local_r$')
 ax.plot(hbaromega, np.imag(local(hbaromega, hbargamma, Ef, T))/sigma_0, lw=3, label=r'$local_i$')
 
