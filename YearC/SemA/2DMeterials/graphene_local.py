@@ -42,8 +42,19 @@ sig_tot = intra + inter
 sig_img = np.imag(sig_tot)
 sig_re = np.real(sig_tot)
 
-plt.plot(hbaromega, sig_img/sigma_0, label="Img")
-plt.plot(hbaromega, sig_re/sigma_0, label="Re")
+plt.plot(hbaromega, sig_img/sigma_0, label="Local Img")
+plt.plot(hbaromega, sig_re/sigma_0, label="Local Re")
+
+intra = (sigma_0/pi) * ( 4*Ef / (hbargamma - 1j*hbaromega))
+inter = sigma_0*(np.heaviside(hbaromega-2*Ef, 1/2) + (1j/pi)*np.log(np.abs((hbaromega-2*Ef)/(hbaromega+2*Ef))))
+kubo = intra + inter
+kubo_re = np.real(kubo)
+kubo_img = np.imag(kubo)
+
+plt.plot(hbaromega, kubo_img/sigma_0, label="kubo Img")
+plt.plot(hbaromega, kubo_re/sigma_0, label="Kubo Re")
+
+
 plt.legend(loc="best")
 plt.show()
 
