@@ -5,6 +5,7 @@ from scipy.constants import c, pi, hbar, k, elementary_charge
 from scipy.integrate import quad_vec
 plt.rcParams['font.size'] = 20
 
+
 def drude_epsilon(omega: np.ndarray, omega_p: float, gamma: float) -> np.ndarray :
     return 1 - np.divide(omega_p**2, omega**2 + gamma*omega*1j)
 
@@ -32,10 +33,10 @@ gamma = 7.59633724e14
 
 fig, ax = plt.subplots()
 
-#ax.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
-#ax.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
+#ax0.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
+#ax0.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
 ax.set(xlabel=r'$\frac{\beta}{k_0} \left[\right]$', ylabel=r'$\omega\ \left[e\mathrm{V}\right]$')
-#ax.vlines(omega_p, -100, 20, colors='r')
+#ax0.vlines(omega_p, -100, 20, colors='r')
 
 ax.plot(betta(omega, drude_epsilon(omega, omega_p, gamma), 1), omega, lw=3)
 
@@ -48,10 +49,10 @@ ax.legend(loc='best')
 
 fig, ax = plt.subplots()
 
-#ax.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
-#ax.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
+#ax0.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
+#ax0.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
 ax.set(xlabel=r'$\lambda$', ylabel=r'$L$')
-#ax.vlines(omega_p, -100, 20, colors='r')
+#ax0.vlines(omega_p, -100, 20, colors='r')
 
 ax.plot(lamda, L(betta(omega, drude_epsilon(omega, omega_p, gamma), 1)), lw=3)
 
@@ -63,10 +64,10 @@ ax.legend(loc='best')
 
 fig, ax = plt.subplots()
 
-#ax.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
-#ax.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
+#ax0.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
+#ax0.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
 ax.set(xlabel=r'$\lambda$', ylabel=r'$\zeta$')
-#ax.vlines(omega_p, -100, 20, colors='r')
+#ax0.vlines(omega_p, -100, 20, colors='r')
 
 ax.plot(lamda, zeta(kz(betta(omega, drude_epsilon(omega, omega_p, gamma), 1), drude_epsilon(omega, omega_p, gamma), omega)), lw=3)
 
@@ -111,10 +112,10 @@ T = 300
 x = np.linspace(-1, 1, 500)
 fig, ax = plt.subplots()
 
-#ax.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
-#ax.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
+#ax0.plot(omega, drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma), label='r')
+#ax0.plot(omega, np.imag(drude_epsilon(omega=omega, omega_p=omega_p, gamma=gamma)), label='i' )
 ax.set(xlabel=r'$\omega\ \left[eV\right]$', ylabel=r'$\frac{\sigma}{\sigma_0}$')
-#ax.vlines(omega_p, -100, 20, colors='r')
+#ax0.vlines(omega_p, -100, 20, colors='r')
 
 ax.plot(hbaromega, kubo_intra(hbaromega, hbargamma, Ef) + kubo_inter(hbaromega, Ef), lw=3, label=r'$Kubo_r$')
 ax.plot(hbaromega, np.imag(kubo_intra(hbaromega, hbargamma, Ef) + kubo_inter(hbaromega, Ef)), lw=3, label=r'$Kubo_i$')

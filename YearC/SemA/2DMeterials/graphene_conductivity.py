@@ -57,10 +57,10 @@ fig, ax = plt.subplots()
 
 ax.set(xlabel=r'$\omega\ \left[eV\right]$', ylabel=r'$\frac{\sigma}{\sigma_0}$', ylim=(-2,2))
        #, xlim=(0, 3), ylim=(-2, 3))
-#ax.vlines(omega_p, -100, 20, colors='r')
+#ax0.vlines(omega_p, -100, 20, colors='r')
 
-# ax.plot(hbaromega, kubo(hbaromega, hbargamma, Ef)/sigma_0, lw=3, label=r'$Kubo_r$')
-# ax.plot(hbaromega, np.imag(kubo(hbaromega, hbargamma, Ef))/sigma_0, lw=3, label=r'$Kubo_i$')
+# ax0.plot(hbaromega, kubo(hbaromega, hbargamma, Ef)/sigma_0, lw=3, label=r'$Kubo_r$')
+# ax0.plot(hbaromega, np.imag(kubo(hbaromega, hbargamma, Ef))/sigma_0, lw=3, label=r'$Kubo_i$')
 ax.plot(hbaromega, local(hbaromega, hbargamma, Ef, T)/sigma_0, lw=3, label=r'$local_r$')
 ax.plot(hbaromega, np.imag(local(hbaromega, hbargamma, Ef, T))/sigma_0, lw=3, label=r'$local_i$')
 

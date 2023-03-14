@@ -11,12 +11,12 @@ from scipy.integrate import quad_vec
 
 EV_TO_HZ = 241799050402293
 kB = 8.617333262e-05  # eV/K
-sigma_0 = elementary_charge**2 / (4*hbar)
+sigma_0 = elementary_charge ** 2 / (4 * hbar)
 INV_M_TO_EV = 1.23984133621559E-06
 
 hBN = "hBN"
 TMD = "TMD"
-
+metal = "metal"
 ########################################################################
 ########################################################################
 ########################################################################
@@ -29,13 +29,19 @@ TMD = "TMD"
 T = 300  # temperature of hetrostructure in units of Kelvin
 
 # Set plotting variable: omega or theta
-len_array = 2000
+len_array = 1000
 theta_in = pi / 3  # theta incident
 
 hw = np.linspace(0, 10, len_array)  # omega in units of hbar*omega = eV
+
+plot_as_func_of_omega = True
+plot_as_func_of_theta = False
+plot_DR = False
 #######################################################################
 #######################################################################
 #######################################################################
+#if plot_DR:
+#    k0 = np.linspace(0, 10*k0[-1], 10*k0.size+1)
 
 
 def FermiDirac(E, temp):
@@ -47,7 +53,7 @@ def FermiDirac(E, temp):
     return FD
 
 
-def graphene_conductivity(w: np.ndarray, gamma: float, ef: float, t: float) -> np.ndarray:
+def graphene_conductivity(w: np.ndarray, t: float, gamma: float = 3.7, ef: float = 0.3) -> np.ndarray:
     """
     All inputs are in units of eV, except t (Temp) which is in units of Kelvin.
     """
@@ -67,7 +73,9 @@ def graphene_conductivity(w: np.ndarray, gamma: float, ef: float, t: float) -> n
         return intra + inter
 
 
-def epsilon_hBN(w: np.ndarray, eps_z_inf: float=2.95, eps_x_inf: float=4.87, wTO_z: float=780, wTO_x: float=1370, wLO_z: float=830, wLO_x: float=1610, Gamma_z: float=4, Gamma_x: float=5) -> (np.ndarray, np.ndarray):
+def epsilon_hBN(w: np.ndarray, eps_z_inf: float = 2.95, eps_x_inf: float = 4.87, wTO_z: float = 780,
+                wTO_x: float = 1370, wLO_z: float = 830, wLO_x: float = 1610, Gamma_z: float = 4,
+                Gamma_x: float = 5) -> (np.ndarray, np.ndarray):
     """
     epsilon_inf is a scalar with no units
     w (omega) is in units of eV
@@ -86,6 +94,32 @@ def epsilon_hBN(w: np.ndarray, eps_z_inf: float=2.95, eps_x_inf: float=4.87, wTO
     e_z = eps_z_inf * (1 + ((wLO_z ** 2 - wTO_z ** 2) / (wTO_z ** 2 - w ** 2 - 1j * Gamma_z * w)))
 
     return e_z, e_x
+
+
+def epsilon_TMD(w: np.ndarray, chi_bg: float = 17, e0: float = 2.066, w0: float = 3.14e15, d0: float = 0.618e-09,
+                gamma_r0: float = 3.52e-03, gamma_nr: float = 1.2e-03, gamma_d: float = 0.5e-03) -> (
+np.ndarray, np.ndarray):
+    """
+    chi_bg is unitless
+    w0 is in units of Hz
+    d0 is in units of m
+    all the other variables is in units of eV
+    """
+
+    chi_x = chi_bg - (c / (w0 * d0)) * (gamma_r0 / (w - e0 + 1j * (gamma_nr / 2 + gamma_d)))
+    e_x = 1 + chi_x
+    e_z = np.ones(w.shape[0])
+
+    return e_z, e_x
+
+def epsilon_drude(w:np.ndarray, wp: float, gamma: float) -> (np.ndarray, np.ndarray):
+    """
+    all parameters are in units of eV
+    """
+
+    e = 1 - (wp**2)/(w**2 + 1j*gamma*w)
+
+    return e, e
 
 
 def mult(a: np.ndarray, b: np.ndarray) -> np.ndarray:
@@ -112,35 +146,41 @@ def mult(a: np.ndarray, b: np.ndarray) -> np.ndarray:
 
 
 class Layer:
-    def __init__(self, mat, d=None) -> None:
+    def __init__(self, material, d=None, wp=None, gamma=None) -> None:
         """
         d is in nanometers
+        wp and gamma are in units of eV
         """
 
         if d is not None:
             self.d = d * 1e-09
 
-        if isinstance(mat, int) or isinstance(mat, float) or isinstance(mat, complex):
-            self.epsilon = (mat, mat)
-        elif mat == hBN:
+        if isinstance(material, int) or isinstance(material, float) or isinstance(material, complex):
+            self.epsilon = (material, material)
+        elif material == hBN:
             self.epsilon = epsilon_hBN(hw)
+        elif material == TMD:
+            self.epsilon = epsilon_TMD(hw)
+        elif material == metal:
+            if wp is None or gamma is None:
+                print("omega_p and gamma must be supplied for a metal")
+                exit(1)
+            self.epsilon = epsilon_drude(hw, wp=wp, gamma=gamma)
 
 
 ########################################################################
 ######################  Define Hetrostructure  #########################
 ########################################################################
 
-layer_in = Layer(mat=1)
+layer_in = Layer(material=1)
 layers = [
-    Layer(d=100, mat=1.3),
-    Layer(d=100, mat=-1)
+    Layer(material=1.3, d=100),
+    Layer(material=-1, d=100)
 ]
-layer_out = Layer(mat=2)
+layer_out = Layer(material=2)
 
 # Graphene
 graphene_transitions = []
-hbar_gamma = 3.7  # gamma of graphene in units of eV
-Ef_graphene = 0.3  # fermi energy of graphene in units of eV
 ########################################################################
 ########################################################################
 ########################################################################
@@ -148,25 +188,33 @@ Ef_graphene = 0.3  # fermi energy of graphene in units of eV
 
 if graphene_transitions:
     print("Calculating the conductivity of graphene...")
-    sigma_graphene = graphene_conductivity(hw, gamma=hbar_gamma, ef=Ef_graphene, t=T)
+    sigma_graphene = graphene_conductivity(hw, t=T)
     print("Finished!")
+
+
 hw = hw.astype(np.complex64)
 
+
 nlayers = len(layers)
+
+
 w = hw * EV_TO_HZ
 k0 = w / c  # [1\m]
 
+
 eps_in_z, eps_in_x = layer_in.epsilon
+eps_out_z, eps_out_x = layer_out.epsilon
+
+
 kx = k0 * np.sqrt(eps_in) * np.sin(theta_in)
 
-eps_out_z, eps_out_x = layer_out.epsilon
 
 TMM = np.zeros((2, 2, len_array), dtype=np.complex64)  # initializing the TMM as unit matrix
 TMM[0, 0, :] = np.ones(len_array)
 TMM[1, 1, :] = np.ones(len_array)
 
 for i in range(nlayers + 1):  # for every TRANSITION
-    print(f"Working on transition {i+1}...")
+    print(f"Working on transition {i + 1}...")
     M = np.empty((2, 2, len_array), dtype=np.complex64)
 
     if i == 0:  # first transition
@@ -179,8 +227,8 @@ for i in range(nlayers + 1):  # for every TRANSITION
     else:
         eps2_z, eps2_x = layers[i].epsilon
 
-    k1z = np.sqrt(eps1_x*k0**2 - (eps1_x/eps1_z)*kx**2)
-    k2z = np.sqrt(eps2_x*k0**2 - (eps2_x/eps2_z)*kx**2)
+    k1z = np.sqrt(eps1_x * k0 ** 2 - (eps1_x / eps1_z) * kx ** 2)
+    k2z = np.sqrt(eps2_x * k0 ** 2 - (eps2_x / eps2_z) * kx ** 2)
 
     eta = (eps1 / eps2) * (k2z / k1z)
 
@@ -203,7 +251,8 @@ for i in range(nlayers + 1):  # for every TRANSITION
     MP = mult(M, P)
 
     TMM = mult(TMM, MP)
-    print(f"Finished transition {i+1}!")
+    print(f"Finished transition {i + 1}!")
+
 
 
 # Reflectance
@@ -213,8 +262,8 @@ R = np.abs(r) ** 2
 # Transistance
 t = 1 / TMM[0, 0, :]
 
-kz_in = np.sqrt(kx ** 2 - eps_in * k0 ** 2)
-kz_out = np.sqrt(kx ** 2 - eps_out * k0 ** 2)
+kz_in = np.sqrt(eps_in_x * k0 ** 2 - (eps_in_x / eps_in_z) * kx ** 2)
+kz_out = np.sqrt(eps_out_x * k0 ** 2 - (eps_out_x / eps_out_z) * kx ** 2)
 eta_p = (eps_in / eps_out) * (kz_out / kz_in)
 
 T = eta_p * np.abs(t) ** 2
@@ -223,12 +272,18 @@ T = eta_p * np.abs(t) ** 2
 A = 1 - R - T
 
 # Plotting
-fig, ax = plt.subplots()
 
-ax.plot(np.real(w), np.real(R), label="R", c="r")
-ax.plot(np.real(w), np.real(T), label="T", c="b")
-ax.plot(np.real(w), np.real(A), label="A", c="gray")
+if plot_as_func_of_omega:
+    fig, ax0 = plt.subplots()
 
-ax.legend(loc="best")
+    ax0.plot(np.real(w), np.real(R), label="R", c="r")
+    ax0.plot(np.real(w), np.real(T), label="T", c="b")
+    ax0.plot(np.real(w), np.real(A), label="A", c="gray")
+
+    ax0.legend(loc="best")
+
+if plot_DR:
+
+
 
 plt.show()
