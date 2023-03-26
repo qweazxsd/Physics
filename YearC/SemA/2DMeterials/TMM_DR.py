@@ -115,10 +115,10 @@ def mult(a: np.ndarray, b: np.ndarray) -> np.ndarray:
 
     c = np.empty(a.shape, dtype=np.complex64)
 
-    c[0, 0, :] = a[0, 0, :] * b[0, 0, :] + a[0, 1, :] * b[1, 0, :]
-    c[0, 1, :] = a[0, 0, :] * b[0, 1, :] + a[0, 1, :] * b[1, 1, :]
-    c[1, 0, :] = a[1, 0, :] * b[0, 0, :] + a[1, 1, :] * b[1, 0, :]
-    c[1, 1, :] = a[1, 0, :] * b[0, 1, :] + a[1, 1, :] * b[1, 1, :]
+    c[0, 0, :, :] = a[0, 0, :, :] * b[0, 0, :, :] + a[0, 1, :, :] * b[1, 0, :, :]
+    c[0, 1, :, :] = a[0, 0, :, :] * b[0, 1, :, :] + a[0, 1, :, :] * b[1, 1, :, :]
+    c[1, 0, :, :] = a[1, 0, :, :] * b[0, 0, :, :] + a[1, 1, :, :] * b[1, 0, :, :]
+    c[1, 1, :, :] = a[1, 0, :, :] * b[0, 1, :, :] + a[1, 1, :, :] * b[1, 1, :, :]
 
     return c
 
@@ -168,9 +168,9 @@ hw = np.linspace(0, 10, len_array)
 #hbar_omega = 2.6
 
 
-plot_as_func_of_omega = True
+plot_as_func_of_omega = False
 plot_as_func_of_theta = False
-plot_DR = False
+plot_DR = True
 
 
 layer_in = Layer(material=1)
@@ -184,22 +184,8 @@ graphene_transitions = []
 ########################################################################
 ########################################################################
 ########################################################################
-
-if graphene_transitions:
-    print("Calculating the conductivity of graphene...")
-    sigma_graphene = graphene_conductivity(hw, t=T)
-    print("Finished!")
-
-if plot_as_func_of_omega:
-    hw = hw.astype(np.complex64)
-
-
-nlayers = len(layers)
-
-
 w = hw * EV_TO_HZ
 k0 = w / c  # [1\m]
-
 
 eps_in_z, eps_in_x = layer_in.epsilon(hw)
 eps_out_z, eps_out_x = layer_out.epsilon(hw)
@@ -207,27 +193,45 @@ eps_out_z, eps_out_x = layer_out.epsilon(hw)
 
 kx = k0 * np.sqrt(eps_in_x) * np.sin(theta)
 
+#q = np.concatenate((kx, np.linspace(kx[-1]+kx[1]-kx[0], 100*kx[-1], len_array)))
+#q = np.linspace(0, 10*kx[-1], len_array)
+q = kx + np.linspace(0, 10**8, len_array)
 
-TMM = np.zeros((2, 2, len_array), dtype=np.complex64)  # initializing the TMM as unit matrix
-TMM[0, 0, :] = np.ones(len_array)
-TMM[1, 1, :] = np.ones(len_array)
+qq, hwhw = np.meshgrid(q, hw)
+
+w = hwhw * EV_TO_HZ
+k0 = w / c  # [1\m]
+
+eps_in_z, eps_in_x = layer_in.epsilon(hwhw)
+eps_out_z, eps_out_x = layer_out.epsilon(hwhw)
+
+if graphene_transitions:
+    print("Calculating the conductivity of graphene...")
+    sigma_graphene = graphene_conductivity(hw, t=T)
+    print("Finished!")
+
+nlayers = len(layers)
+
+TMM = np.zeros((2, 2, len_array, len_array), dtype=np.complex64)  # initializing the TMM as unit matrix
+TMM[0, 0, :, :] = np.ones(shape=(len_array, len_array))
+TMM[1, 1, :, :] = np.ones(shape=(len_array, len_array))
 
 for i in range(nlayers + 1):  # for every TRANSITION
     print(f"Working on transition {i + 1}...")
-    M = np.empty((2, 2, len_array), dtype=np.complex64)
+    M = np.empty((2, 2, len_array, len_array), dtype=np.complex64)
 
     if i == 0:  # first transition
         eps1_z, eps1_x = eps_in_z, eps_in_x
     else:
-        eps1_z, eps1_x = layers[i - 1].epsilon(hw)
+        eps1_z, eps1_x = layers[i - 1].epsilon(hwhw)
 
     if i == nlayers:  # last transition
         eps2_z, eps2_x = eps_out_z, eps_out_x
     else:
-        eps2_z, eps2_x = layers[i].epsilon(hw)
+        eps2_z, eps2_x = layers[i].epsilon(hwhw)
 
-    k1z = np.sqrt(eps1_x * k0 ** 2 - (eps1_x / eps1_z) * kx ** 2)
-    k2z = np.sqrt(eps2_x * k0 ** 2 - (eps2_x / eps2_z) * kx ** 2)
+    k1z = np.sqrt(eps1_x * k0 ** 2 - (eps1_x / eps1_z) * qq ** 2)
+    k2z = np.sqrt(eps2_x * k0 ** 2 - (eps2_x / eps2_z) * qq ** 2)
 
     eta = (eps1_x / eps2_x) * (k2z / k1z)
 
@@ -235,17 +239,17 @@ for i in range(nlayers + 1):  # for every TRANSITION
     if i in graphene_transitions:
         zeta = sigma_graphene * k2z / (epsilon_0 * eps2_x * w)
 
-    M[0, 0, :] = 1 / 2 * (1 + eta + zeta)
-    M[0, 1, :] = 1 / 2 * (1 - eta - zeta)
-    M[1, 0, :] = 1 / 2 * (1 - eta + zeta)
-    M[1, 1, :] = 1 / 2 * (1 + eta - zeta)
+    M[0, 0, :, :] = 1 / 2 * (1 + eta + zeta)
+    M[0, 1, :, :] = 1 / 2 * (1 - eta - zeta)
+    M[1, 0, :, :] = 1 / 2 * (1 - eta + zeta)
+    M[1, 1, :, :] = 1 / 2 * (1 + eta - zeta)
 
-    P = np.zeros((2, 2, len_array), dtype=np.complex64)  # initializing the propogation matrix as unit matrix
-    P[0, 0, :] = np.ones(len_array)
-    P[1, 1, :] = np.ones(len_array)
+    P = np.zeros((2, 2, len_array, len_array), dtype=np.complex64)  # initializing the propogation matrix as unit matrix
+    P[0, 0, :, :] = np.ones(shape=(len_array, len_array))
+    P[1, 1, :, :] = np.ones(shape=(len_array, len_array))
     if i != nlayers:
-        P[0, 0, :] = np.exp(-1j * k1z * layers[i].d)
-        P[1, 1, :] = np.exp(1j * k1z * layers[i].d)
+        P[0, 0, :, :] = np.exp(-1j * k1z * layers[i].d)
+        P[1, 1, :, :] = np.exp(1j * k1z * layers[i].d)
 
     MP = mult(M, P)
 
@@ -255,14 +259,14 @@ for i in range(nlayers + 1):  # for every TRANSITION
 
 
 # Reflectance
-r = TMM[1, 0, :] / TMM[0, 0, :]
+r = TMM[1, 0, :, :] / TMM[0, 0, :, :]
 R = np.abs(r) ** 2
 
 # Transistance
-t = 1 / TMM[0, 0, :]
+t = 1 / TMM[0, 0, :, :]
 
-kz_in = np.sqrt(eps_in_x * k0 ** 2 - (eps_in_x / eps_in_z) * kx ** 2)
-kz_out = np.sqrt(eps_out_x * k0 ** 2 - (eps_out_x / eps_out_z) * kx ** 2)
+kz_in = np.sqrt(eps_in_x * k0 ** 2 - (eps_in_x / eps_in_z) * qq ** 2)
+kz_out = np.sqrt(eps_out_x * k0 ** 2 - (eps_out_x / eps_out_z) * qq ** 2)
 eta_p = (eps_in_x / eps_out_x) * (kz_out / kz_in)
 
 T = eta_p * np.abs(t) ** 2
@@ -273,7 +277,7 @@ A = 1 - R - T
 # Plotting
 
 if plot_as_func_of_omega:
-    fig, ax0 = plt.subplots(figsize=(19, 11))
+    fig0, ax0 = plt.subplots(figsize=(19, 11))
 
     ax0.plot(np.real(hw), np.real(R), label="R", c="r", lw=3)
     ax0.plot(np.real(hw), np.real(T), label="T", c="b", lw=3)
@@ -285,19 +289,23 @@ if plot_as_func_of_omega:
     ax0.legend(loc="best")
 
 if plot_as_func_of_theta:
-    fig, ax0 = plt.subplots(figsize=(19, 11))
+    fig1, ax1 = plt.subplots(figsize=(19, 11))
 
-    ax0.plot(np.real(theta)/(pi/2), np.real(R), label="R", c="r", lw=3)
-    ax0.plot(np.real(theta)/(pi/2), np.real(T), label="T", c="b", lw=3)
-    ax0.plot(np.real(theta)/(pi/2), np.real(A), label="A", c="gray", lw=3)
+    ax1.plot(np.real(theta)/(pi/2), np.real(R), label="R", c="r", lw=3)
+    ax1.plot(np.real(theta)/(pi/2), np.real(T), label="T", c="b", lw=3)
+    ax1.plot(np.real(theta)/(pi/2), np.real(A), label="A", c="gray", lw=3)
 
-    ax0.set(xlabel=r'$\theta$ \ $\frac{\pi}{2}$')
+    ax1.set(xlabel=r'$\theta$ \ $\frac{\pi}{2}$')
 
-    ax0.grid()
-    ax0.legend(loc="best")
+    ax1.grid()
+    ax1.legend(loc="best")
 
-#if plot_DR:
+if plot_DR:
+    fig2, ax2 = plt.subplots(figsize=(19, 11))
 
+    ax2.contourf(qq, hwhw, np.imag(r))
+
+    ax2.set(xlabel=r'$q$')
 
 
 plt.show()

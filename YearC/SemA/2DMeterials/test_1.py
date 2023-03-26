@@ -1,17 +1,13 @@
 import numpy as np
 
-a = np.linspace(0, 10, 10)
-b = np.linspace(0, 10*a[-1], 10*a.size)
-print(a)
-print(a.size)
-print(b)
-print(b.size)
+a = np.asarray([
+    [1, 2],
+    [3, 4]
+])
 
-c = np.concatenate(
-    [
-        a+a[-1]*i for i in range(11)
-    ]
-)
+b = np.asarray([
+    [5, 6],
+    [7, 8]
+])
 
-print(c)
-print(c.size)
+print(a@b)

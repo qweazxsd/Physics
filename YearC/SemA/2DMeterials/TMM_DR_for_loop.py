@@ -3,7 +3,7 @@ np.seterr(invalid='ignore')
 import matplotlib.pyplot as plt
 from scipy.constants import c, epsilon_0, hbar, mu_0, pi, elementary_charge
 from sys import exit
-from scipy.integrate import quad_vec
+from scipy.integrate import quad
 plt.rcParams['font.size'] = 20
 ########################################################################
 #############################  CONSTANTS  ##############################
@@ -31,7 +31,7 @@ def FermiDirac(E, temp):
     return FD
 
 
-def graphene_conductivity(w: np.ndarray, t: float, gamma: float = 3.7, ef: float = 0.3) -> np.ndarray:
+def graphene_conductivity(w, t: float, gamma: float = 3.7, ef: float = 0.3) -> float:
     """
     All inputs are in units of eV, except t (Temp) which is in units of Kelvin.
     """
@@ -45,15 +45,15 @@ def graphene_conductivity(w: np.ndarray, t: float, gamma: float = 3.7, ef: float
 
         G = lambda x: FermiDirac(-x - ef, t) - FermiDirac(x - ef, t)
         integrand = lambda x: (G(x) - G(w / 2)) / (w ** 2 - 4 * x ** 2)
-        integral, err = quad_vec(integrand, 0, 10 * ef)
+        integral, err = quad(integrand, 0, 10 * ef)
         inter = sigma_0 * (G(w / 2) + (4j * w / pi) * integral)
 
         return intra + inter
 
 
-def epsilon_hBN(w: np.ndarray, eps_z_inf: float = 2.95, eps_x_inf: float = 4.87, wTO_z: float = 780,
+def epsilon_hBN(w, eps_z_inf: float = 2.95, eps_x_inf: float = 4.87, wTO_z: float = 780,
                 wTO_x: float = 1370, wLO_z: float = 830, wLO_x: float = 1610, Gamma_z: float = 4,
-                Gamma_x: float = 5) -> (np.ndarray, np.ndarray):
+                Gamma_x: float = 5) -> (float, float):
     """
     epsilon_inf is a scalar with no units
     w (omega) is in units of eV
@@ -74,9 +74,9 @@ def epsilon_hBN(w: np.ndarray, eps_z_inf: float = 2.95, eps_x_inf: float = 4.87,
     return e_z, e_x
 
 
-def epsilon_TMD(w: np.ndarray, chi_bg: float = 17, e0: float = 2.066, w0: float = 3.14e15, d0: float = 0.618e-09,
+def epsilon_TMD(w, chi_bg: float = 17, e0: float = 2.066, w0: float = 3.14e15, d0: float = 0.618e-09,
                 gamma_r0: float = 3.52e-03, gamma_nr: float = 1.2e-03, gamma_d: float = 0.5e-03) -> (
-np.ndarray, np.ndarray):
+float, float):
     """
     chi_bg is unitless
     w0 is in units of Hz
@@ -86,11 +86,11 @@ np.ndarray, np.ndarray):
 
     chi_x = chi_bg - (c / (w0 * d0)) * (gamma_r0 / (w - e0 + 1j * (gamma_nr / 2 + gamma_d)))
     e_x = 1 + chi_x
-    e_z = np.ones(w.shape[0])
+    e_z = 1
 
     return e_z, e_x
 
-def epsilon_drude(w:np.ndarray, wp: float, gamma: float) -> (np.ndarray, np.ndarray):
+def epsilon_drude(w, wp: float, gamma: float) -> (float, float):
     """
     all parameters are in units of eV
     """
@@ -98,29 +98,6 @@ def epsilon_drude(w:np.ndarray, wp: float, gamma: float) -> (np.ndarray, np.ndar
     e = 1 - (wp**2)/(w**2 + 1j*gamma*w)
 
     return e, e
-
-
-def mult(a: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """
-    This function takes two 2X2Xn matrices and performs regular matrix 
-    multiplication along the first two axes. 
-    every element in the 2X2 matrix is a vector. 
-    """
-    if a.shape != b.shape:
-        print("Shapes of arrays must match")
-        exit(1)
-    if a.shape[0] != 2 or a.shape[1] != 2 or b.shape[0] != 2 or b.shape[1] != 2:
-        print("only 2X2 matrices")
-        exit(1)
-
-    c = np.empty(a.shape, dtype=np.complex64)
-
-    c[0, 0, :] = a[0, 0, :] * b[0, 0, :] + a[0, 1, :] * b[1, 0, :]
-    c[0, 1, :] = a[0, 0, :] * b[0, 1, :] + a[0, 1, :] * b[1, 1, :]
-    c[1, 0, :] = a[1, 0, :] * b[0, 0, :] + a[1, 1, :] * b[1, 0, :]
-    c[1, 1, :] = a[1, 0, :] * b[0, 1, :] + a[1, 1, :] * b[1, 1, :]
-
-    return c
 
 
 class Layer:
@@ -164,13 +141,14 @@ theta = pi / 6
 #theta = np.linspace(0, pi/2, len_array)
 
 # omega in units of hbar*omega = eV
-hw = np.linspace(0, 10, len_array)
+hbar_omega = np.linspace(0, 10, len_array)
 #hbar_omega = 2.6
 
+Q = np.linspace(0, 10**15, len_array)
 
-plot_as_func_of_omega = True
+plot_as_func_of_omega = False
 plot_as_func_of_theta = False
-plot_DR = False
+plot_DR = True
 
 
 layer_in = Layer(material=1)
@@ -185,119 +163,77 @@ graphene_transitions = []
 ########################################################################
 ########################################################################
 
-if graphene_transitions:
-    print("Calculating the conductivity of graphene...")
-    sigma_graphene = graphene_conductivity(hw, t=T)
-    print("Finished!")
-
-if plot_as_func_of_omega:
-    hw = hw.astype(np.complex64)
-
-
 nlayers = len(layers)
 
+r = np.empty((len_array, len_array), dtype=np.complex64)
 
-w = hw * EV_TO_HZ
-k0 = w / c  # [1\m]
+count = 0
+for i, q in np.ndenumerate(Q):
+    for j, _w in np.ndenumerate(hbar_omega):
 
+        w = _w * EV_TO_HZ
+        k0 = w / c  # [1\m]
 
-eps_in_z, eps_in_x = layer_in.epsilon(hw)
-eps_out_z, eps_out_x = layer_out.epsilon(hw)
+        eps_in_z, eps_in_x = layer_in.epsilon(_w)
+        eps_out_z, eps_out_x = layer_out.epsilon(_w)
 
-
-kx = k0 * np.sqrt(eps_in_x) * np.sin(theta)
-
-
-TMM = np.zeros((2, 2, len_array), dtype=np.complex64)  # initializing the TMM as unit matrix
-TMM[0, 0, :] = np.ones(len_array)
-TMM[1, 1, :] = np.ones(len_array)
-
-for i in range(nlayers + 1):  # for every TRANSITION
-    print(f"Working on transition {i + 1}...")
-    M = np.empty((2, 2, len_array), dtype=np.complex64)
-
-    if i == 0:  # first transition
-        eps1_z, eps1_x = eps_in_z, eps_in_x
-    else:
-        eps1_z, eps1_x = layers[i - 1].epsilon(hw)
-
-    if i == nlayers:  # last transition
-        eps2_z, eps2_x = eps_out_z, eps_out_x
-    else:
-        eps2_z, eps2_x = layers[i].epsilon(hw)
-
-    k1z = np.sqrt(eps1_x * k0 ** 2 - (eps1_x / eps1_z) * kx ** 2)
-    k2z = np.sqrt(eps2_x * k0 ** 2 - (eps2_x / eps2_z) * kx ** 2)
-
-    eta = (eps1_x / eps2_x) * (k2z / k1z)
-
-    zeta = 0
-    if i in graphene_transitions:
-        zeta = sigma_graphene * k2z / (epsilon_0 * eps2_x * w)
-
-    M[0, 0, :] = 1 / 2 * (1 + eta + zeta)
-    M[0, 1, :] = 1 / 2 * (1 - eta - zeta)
-    M[1, 0, :] = 1 / 2 * (1 - eta + zeta)
-    M[1, 1, :] = 1 / 2 * (1 + eta - zeta)
-
-    P = np.zeros((2, 2, len_array), dtype=np.complex64)  # initializing the propogation matrix as unit matrix
-    P[0, 0, :] = np.ones(len_array)
-    P[1, 1, :] = np.ones(len_array)
-    if i != nlayers:
-        P[0, 0, :] = np.exp(-1j * k1z * layers[i].d)
-        P[1, 1, :] = np.exp(1j * k1z * layers[i].d)
-
-    MP = mult(M, P)
-
-    TMM = mult(TMM, MP)
-    print(f"Finished transition {i + 1}!")
+        kx = k0 * np.sqrt(eps_in_x) * np.sin(theta) + q
 
 
+        TMM = np.zeros((2, 2), dtype=np.complex64)  # initializing the TMM as unit matrix
+        TMM[0, 0] = 1
+        TMM[1, 1] = 1
 
-# Reflectance
-r = TMM[1, 0, :] / TMM[0, 0, :]
-R = np.abs(r) ** 2
+        for i in range(nlayers + 1):  # for every TRANSITION
+            M = np.empty((2, 2), dtype=np.complex64)
 
-# Transistance
-t = 1 / TMM[0, 0, :]
+            if i == 0:  # first transition
+                eps1_z, eps1_x = eps_in_z, eps_in_x
+            else:
+                eps1_z, eps1_x = layers[i - 1].epsilon(_w)
 
-kz_in = np.sqrt(eps_in_x * k0 ** 2 - (eps_in_x / eps_in_z) * kx ** 2)
-kz_out = np.sqrt(eps_out_x * k0 ** 2 - (eps_out_x / eps_out_z) * kx ** 2)
-eta_p = (eps_in_x / eps_out_x) * (kz_out / kz_in)
+            if i == nlayers:  # last transition
+                eps2_z, eps2_x = eps_out_z, eps_out_x
+            else:
+                eps2_z, eps2_x = layers[i].epsilon(_w)
 
-T = eta_p * np.abs(t) ** 2
+            k1z = np.sqrt(eps1_x * k0 ** 2 - (eps1_x / eps1_z) * kx ** 2)
+            k2z = np.sqrt(eps2_x * k0 ** 2 - (eps2_x / eps2_z) * kx ** 2)
 
-# Absorbance
-A = 1 - R - T
+            eta = (eps1_x / eps2_x) * (k2z / k1z)
+
+            zeta = 0
+            if i in graphene_transitions:
+                zeta = graphene_conductivity(_w, t=T) * k2z / (epsilon_0 * eps2_x * _w)
+
+            M[0, 0] = 1 / 2 * (1 + eta + zeta)
+            M[0, 1] = 1 / 2 * (1 - eta - zeta)
+            M[1, 0] = 1 / 2 * (1 - eta + zeta)
+            M[1, 1] = 1 / 2 * (1 + eta - zeta)
+
+            P = np.zeros((2, 2), dtype=np.complex64)  # initializing the propogation matrix as unit matrix
+            P[0, 0] = 1
+            P[1, 1] = 1
+            if i != nlayers:
+                P[0, 0] = np.exp(-1j * k1z * layers[i].d)
+                P[1, 1] = np.exp(1j * k1z * layers[i].d)
+
+            MP = M@P
+
+            TMM = TMM@MP
+
+            r[i, j] = TMM[1, 0] / TMM[0, 0]
+
+        print(f"{(count/(len_array**2 - 1))*100:.2f}%")
+        count += 1
+
 
 # Plotting
 
-if plot_as_func_of_omega:
-    fig, ax0 = plt.subplots(figsize=(19, 11))
+fig, ax0 = plt.subplots(figsize=(19, 11))
 
-    ax0.plot(np.real(hw), np.real(R), label="R", c="r", lw=3)
-    ax0.plot(np.real(hw), np.real(T), label="T", c="b", lw=3)
-    ax0.plot(np.real(hw), np.real(A), label="A", c="gray", lw=3)
+ax0.imshow(np.imag(r))
 
-    ax0.set(xlabel=r'$\hbar\omega$ [eV]')
-
-    ax0.grid()
-    ax0.legend(loc="best")
-
-if plot_as_func_of_theta:
-    fig, ax0 = plt.subplots(figsize=(19, 11))
-
-    ax0.plot(np.real(theta)/(pi/2), np.real(R), label="R", c="r", lw=3)
-    ax0.plot(np.real(theta)/(pi/2), np.real(T), label="T", c="b", lw=3)
-    ax0.plot(np.real(theta)/(pi/2), np.real(A), label="A", c="gray", lw=3)
-
-    ax0.set(xlabel=r'$\theta$ \ $\frac{\pi}{2}$')
-
-    ax0.grid()
-    ax0.legend(loc="best")
-
-#if plot_DR:
-
-
+ax0.set(xlabel=r'$q$ [1/m]', )
 
 plt.show()
