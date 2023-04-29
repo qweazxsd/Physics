@@ -6,13 +6,15 @@ from matplotlib import ticker
 from scipy.constants import c, epsilon_0, hbar, mu_0, pi, elementary_charge
 from sys import exit
 from scipy.integrate import quad_vec, quad
+import matplotlib
+
 
 plt.rcParams['font.size'] = 20
 ########################################################################
 #############################  CONSTANTS  ##############################
 ########################################################################
 
-EV_TO_HZ = 241799050402293
+EV_TO_RAD_PER_SEC = 241799050402293*2*pi
 kB = 8.617333262e-05  # eV/K
 sigma_0 = elementary_charge ** 2 / (4 * hbar)
 INV_CM_TO_EV = 1.23984133621559E-04
@@ -32,7 +34,7 @@ def FermiDirac(E, temp):
     """
     E in units of eV
     """
-    FD = np.exp(-np.logaddexp(E / (kB * (temp + 0.000000000001)), 0))
+    FD = np.exp(-np.logaddexp(E / (kB * (temp + 0.000001)), 0))
 
     return FD
 
@@ -245,49 +247,73 @@ T = 300  # temperature of hetrostructure in units of Kelvin
 len_array = 1000
 
 # theta incident
-#theta = 0
-theta = np.linspace(0, pi/2, len_array)
+theta = 0
+#theta = np.linspace(0, pi/2, len_array)
 
 # omega in units of hbar*omega = eV
-#hw = np.linspace(2.016, 2.12, len_array)
-hw = 0.17
+hw = np.linspace(0, 0.2, len_array)
+#hw = 3.14e15 * hbar / elementary_charge
+#hw = 0.17
 
-Q = np.linspace(0, 2e7, len_array)
+Q = np.linspace(0, 5e6, len_array)
 
 plot_as_func_of_omega = False
-plot_as_func_of_theta = True
-plot_DR = False
+plot_as_func_of_theta = False
+plot_DR = True
 
 layer_in = Layer(material=1)
 layers = [
-    Layer(material=hBN, d=9),
-
+Layer(material=SiO2, d=50),
 ]
-layer_out = Layer(material=1)
+layer_out = Layer(material=SiC)
 
 # Graphene
-graphene_transitions = [0, 1]
+graphene_transitions = [1]
 gamma_graphene = 3.7 * 1e-03
 ########################################################################
 ########################################################################
 ########################################################################
+if plot_DR:
+    if plot_as_func_of_theta or plot_as_func_of_omega:
+        print("Only one plot.")
+        exit(1)
+elif plot_as_func_of_omega:
+    if plot_DR or plot_as_func_of_theta:
+        print("Only one plot.")
+        exit(1)
+    if not isinstance(hw, np.ndarray) or isinstance(theta, np.ndarray):
+        print("hw must be a vector and theta must be a scalar.")
+        exit(1)
+elif plot_as_func_of_theta:
+    if plot_DR or plot_as_func_of_omega:
+        print("Only one plot.")
+        exit(1)
+    if not isinstance(theta, np.ndarray) or isinstance(hw, np.ndarray):
+        print("theta must be a vector and hw must be a scalar.")
+        exit(1)
+else:
+    print("At least one plot.")
+    exit(1)
+
 if graphene_transitions:
     print("Calculating the conductivity of graphene...")
     sigma_graphene = graphene_conductivity(hw, t=T, gamma=gamma_graphene)
     print("Finished!")
 
-w = hw * EV_TO_HZ
+w = hw * EV_TO_RAD_PER_SEC
 k0 = w / c  # [1\m]
 
 eps_in_z, eps_in_x = layer_in.epsilon(hw)
-
 kx = k0 * np.sqrt(eps_in_x) * np.sin(theta)
 
-q = kx + Q
+q = kx + plot_DR*Q
+
+if not isinstance(hw, np.ndarray):
+    hw = hw * np.ones(shape=theta.shape)
 
 qq, hwhw = np.meshgrid(q, hw)
 
-w = hwhw * EV_TO_HZ
+w = hwhw * EV_TO_RAD_PER_SEC
 k0 = w / c  # [1\m]
 
 eps_in_z, eps_in_x = layer_in.epsilon(hwhw)
@@ -332,8 +358,6 @@ for i in range(nlayers + 1):  # for every TRANSITION
     P[0, 0, :, :] = np.ones(shape=(len_array, len_array))
     P[1, 1, :, :] = np.ones(shape=(len_array, len_array))
     if i != nlayers:
-        # P[0, 0, :, :] = np.cos(k2z * layers[i].d, dtype=np.clongdouble) - 1j * np.sin(k2z * layers[i].d, dtype=np.clongdouble)
-        # P[1, 1, :, :] = np.cos(k2z * layers[i].d, dtype=np.clongdouble) + 1j * np.sin(k2z * layers[i].d, dtype=np.clongdouble)
         P[0, 0, :, :] = np.exp(-1j * k2z * layers[i].d, dtype=np.clongdouble)
         P[1, 1, :, :] = np.exp(1j * k2z * layers[i].d, dtype=np.clongdouble)
 
@@ -352,7 +376,7 @@ t = 1 / TMM[0, 0, :, :]
 kz_in = np.sqrt(eps_in_x * (k0 ** 2) - (eps_in_x / eps_in_z) * (qq ** 2), dtype=np.clongdouble)
 kz_out = np.sqrt(eps_out_x * (k0 ** 2) - (eps_out_x / eps_out_z) * (qq ** 2), dtype=np.clongdouble)
 
-eta_p = (eps_in_z / eps_out_z) * (kz_out / kz_in)
+eta_p = (eps_in_x / eps_out_x) * (kz_out / kz_in)
 
 T = eta_p * np.abs(t) ** 2
 
@@ -376,9 +400,9 @@ if plot_as_func_of_omega:
 if plot_as_func_of_theta:
     fig1, ax1 = plt.subplots(figsize=(19, 11))
 
-    ax1.plot(np.real(theta) / (pi / 2), np.real(R[:, 0]), label="R", c="r", lw=3)
-    ax1.plot(np.real(theta) / (pi / 2), np.real(T[:, 0]), label="T", c="b", lw=3)
-    ax1.plot(np.real(theta) / (pi / 2), np.real(A[:, 0]), label="A", c="gray", lw=3)
+    ax1.plot(theta / (pi / 2), np.real(R[0, :]), label="R", c="r", lw=3)
+    ax1.plot(theta / (pi / 2), np.real(T[0, :]), label="T", c="b", lw=3)
+    ax1.plot(theta / (pi / 2), np.real(A[0, :]), label="A", c="gray", lw=3)
 
     ax1.set(xlabel=r'$\theta$ \ $\frac{\pi}{2}$')
 
@@ -388,10 +412,9 @@ if plot_as_func_of_theta:
 if plot_DR:
     fig2, ax2 = plt.subplots(figsize=(19, 11))
 
-    plot = ax2.contourf(qq, hwhw, np.imag(r), cmap='plasma')
-
+    plot = ax2.imshow(np.flip(np.imag(r), axis=0), extent=(q.min(), q.max(), hwhw.min(), hwhw.max()), aspect='auto', cmap='plasma')
+    fig2.colorbar(plot)
     ax2.set(xlabel=r'q [1/m]', ylabel=r"$\hbar\omega$ [eV]")
 
-    fig2.colorbar(plot)
 
 plt.show()
