@@ -30,6 +30,6 @@ for i, mode in enumerate(modes):
 
 
 PHI_zpf = S * sqrt(0.5 * Om @ P @ np.linalg.inv(Ej))
-CHI = 0.25 * Om @ P @ np.linalg.inv(Ej) @ P.T @ Om * 1000  # MHz
+CHI = 0.25 * Om @ P @ np.linalg.inv(Ej) @ P.T @ Om * 1000  # Dim(mode, mode), MHz, hbar missing?
 alpha = 0.5 * np.diag(CHI)
 Lamb_shift = 0.5 np.trace(CHI)
